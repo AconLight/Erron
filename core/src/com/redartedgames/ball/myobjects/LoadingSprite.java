@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 public class LoadingSprite extends ReversableObject{
 
-	SpriteObject sprite;
+	public SpriteObject sprite;
 	Player player;
 	float k = 100;
 	float dx = 0, dy = 110;
@@ -22,7 +22,10 @@ public class LoadingSprite extends ReversableObject{
 		super(x, y, parent, id);
 		isAttached = true;
 		sprite = new SpriteObject(x, y, this, 0);
-		sprite.addTexture("graphic/load.png");
+		sprite.addTexture("graphic/load1.png");
+		sprite.addTexture("graphic/load2.png");
+		sprite.addTexture("graphic/load3.png");
+		sprite.addTexture("graphic/load4.png");
 		gameObjects.add(sprite);
 		sprite.sclX = 1.4f;
 		sprite.sclY = 1.4f;
