@@ -200,21 +200,21 @@ public class StoryBase {
 			
 			"The real fun hasn\'t started yet",
 			
-			"Can you break the time?",
+			"Time to break the time",
 			
-			"Why are you still playing?",
+			"Somebody follows me",
 			
-			"Exit and enjoy better games",
+			"Two imps, three lamps",
 			
-			"Sooo mindblowing..",
+			"One imp, two lamps",
 			
-			"Btw I\'m already drunk and too lazy to make another level",
+			"And again...",
 			
-			"I was kidding, here is another",
+			"It isn\'t that complicated, right?",
 			
-			"Ok I think I wasn\'t kidding... This is the end of the demo. If you want more, find me and buy a beer",
+			"First time in the history. Blue imp and a red one. Together. ",
 			
-			"Thanks for playing :)",
+			"This is the end of the demo\n\nThanks for playing :)\n\nGame developers hate him! \nHe finished all levels using this one weird trick. See how...",
 			
 	};
 	

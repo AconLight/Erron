@@ -24,6 +24,8 @@ import com.redartedgames.ball.menu.MenuScreen;
 import com.redartedgames.ball.menu.MenuWorld;
 import com.redartedgames.ball.screen.Consts;
 import com.redartedgames.ball.sound.SoundHandler;
+import com.redartedgames.ball.splash.SplashScreen;
+import com.redartedgames.ball.splash.SplashWorld;
 
 
 public class BallGame extends Game{
@@ -43,8 +45,22 @@ public class BallGame extends Game{
 	private Color bg;
 	private Vector3 v;
 	private float time;
+
+	private SplashScreen splashScreen;
+	private SplashWorld splashWorld;
+
 	@Override
 	public void create () {
+		screenId = 0;
+		splashScreen = new SplashScreen(Consts.gameWidth, Consts.gameHeight);
+		splashWorld = (SplashWorld)splashScreen.getWorld();
+		Gdx.gl.glClearColor(240f/256, 240f/256, 240f/256, 1);
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		Gdx.input.setCursorCatched(true);
+	}
+
+	public void load() {
 		SoundHandler.load();
 		EasterEggsBase.tryFirstLoad();
 		state = new StateMachine() {
@@ -52,8 +68,7 @@ public class BallGame extends Game{
 			@Override public void setMap() { setMapMy(); }
 			@Override public void setGame() { setGameMy(); }
 		};
-		
-		screenId = 1;
+
 		gameScreen = new GameScreen(Consts.gameWidth, Consts.gameHeight);
 		menuScreen = new MenuScreen(Consts.gameWidth, Consts.gameHeight);
 		mapScreen = new MapScreen(Consts.gameWidth, Consts.gameHeight);
@@ -67,10 +82,6 @@ public class BallGame extends Game{
 		menuHandler = new MenuInputHandler(menuWorld);
 		mapHandler = new MapInputHandler(mapWorld);
 		Gdx.input.setInputProcessor(menuHandler);
-		Gdx.gl.glClearColor(240f/256, 240f/256, 240f/256, 1);
-		Gdx.gl.glEnable(GL20.GL_BLEND);
-		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		Gdx.input.setCursorCatched(true);
 		cg = new ColorGenerator(4.5f);
 		bg = new Color(cg.generateNextColor(0.3f, 0.7f, 0));
 		time = 0;
@@ -86,9 +97,24 @@ public class BallGame extends Game{
 	int frames = 2400;
 	int updateFrames = 100;
 	float frameTime = 1f/frames;
+
+	float splashTime = 0;
 	@Override
 	public void render () {
 		switch(screenId) {
+			case 0: {
+				splashTime += 0.01f;
+				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+				Gdx.gl.glClearColor(0/255f, 0/255f, 0/255f, 1);
+				for(int i = 0; i < 5; i++)
+					splashScreen.update(0.01f);
+				splashScreen.render();
+				if (splashTime > 5) {
+					load();
+					screenId = 1;
+				}
+				break;
+			}
 		case 1: {
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			Gdx.gl.glClearColor(62/255f, 136/255f, 133/255f, 1);

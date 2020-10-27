@@ -16,8 +16,9 @@ public class Combination {
 		String[] values;
 		values = comb.split(" ");
 		for(int i = 0; i < values.length; i++) {
-			if (comb != "")
-				combination.add(Integer.parseInt(values[i]));
+			if (comb != "") {
+				//combination.add(Integer.parseInt(values[i]));
+			}
 		}
 		
 		combination.sort(new Comparator<Integer>() {

@@ -10,14 +10,7 @@ import com.redartedgames.ball.consts.LauncherSettings;
 import com.redartedgames.ball.dialog.BreakWindow;
 import com.redartedgames.ball.dialog.DialogHero;
 import com.redartedgames.ball.graphicgenerators.BlackScreenAnimation;
-import com.redartedgames.ball.myobjects.Ball;
-import com.redartedgames.ball.myobjects.ButtonRect;
-import com.redartedgames.ball.myobjects.ImpsCollection;
-import com.redartedgames.ball.myobjects.LavaRect;
-import com.redartedgames.ball.myobjects.MovingRect;
-import com.redartedgames.ball.myobjects.Player;
-import com.redartedgames.ball.myobjects.Rect;
-import com.redartedgames.ball.myobjects.ShiftedRect;
+import com.redartedgames.ball.myobjects.*;
 import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.objects.ReversableObject;
 import com.redartedgames.ball.objects.SpriteObject;
@@ -162,7 +155,7 @@ public class GameWorld extends World{
 				gameObjects.add(nextLvlRect); ///  +1
 				restart(levelId);
 				gameObjects.remove(nextLvlRect);
-				gameObjects.add(nextLvlRect); 
+				gameObjects.add(nextLvlRect);
 				//isNextLvl = false;
 				isBreak = true;
 				blackScreenAnimation.reset();
