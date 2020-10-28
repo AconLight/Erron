@@ -18,7 +18,7 @@ public class MenuWorld extends World{
 	int time;
 	boolean isForward;
 	ArrayList<ReversableObject> reversableObjects;
-	SpriteObject menu, menu_play, menu_map, menu_reset;
+	SpriteObject menu, menu_play, menu_map, menu_reset, menu_enter_play, menu_enter_map, menu_enter_reset;
 	Color selectedColor = new Color(0.6f, 0, 0, 0.6f);
 	Color notSelectedColor = new Color(0.6f, 0.6f, 0.6f, 0.6f);
 	Color playColor, mapColor, resetColor;
@@ -40,6 +40,14 @@ public class MenuWorld extends World{
 		gameObjects.add(menu_play);
 		gameObjects.add(menu_map);
 		gameObjects.add(menu_reset);
+
+		menu_enter_play = new SpriteObject(Consts.gameWidth/2, Consts.gameHeight/2, null, 0); menu_enter_play.addTexture("graphic/menu/menuenterplay.png");
+		menu_enter_map = new SpriteObject(Consts.gameWidth/2, Consts.gameHeight/2, null, 0); menu_enter_map.addTexture("graphic/menu/menuentermap.png");
+		menu_enter_reset = new SpriteObject(Consts.gameWidth/2, Consts.gameHeight/2, null, 0); menu_enter_reset.addTexture("graphic/menu/menuenterreset.png");
+		gameObjects.add(menu_enter_play);
+		gameObjects.add(menu_enter_map);
+		gameObjects.add(menu_enter_reset);
+
 		selectedTime = 0;
 		selectedId = 1;
 		setSelected(selectedId);
@@ -103,6 +111,10 @@ public class MenuWorld extends World{
 		menu_play.setColor(playColor);
 		menu_map.setColor(mapColor);
 		menu_reset.setColor(resetColor);
+
+		menu_enter_play.visibility = (0.6f-menu_play.G)*10/6;
+		menu_enter_map.visibility = (0.6f-menu_map.G)*10/6;
+		menu_enter_reset.visibility = (0.6f-menu_reset.G)*10/6;
 		
 		
 		

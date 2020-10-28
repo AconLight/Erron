@@ -1,5 +1,6 @@
 package com.redartedgames.ball.game;
 
+import com.badlogic.gdx.Game;
 import com.redartedgames.ball.editor.EditorPicker;
 import com.redartedgames.ball.editor.ObjectPick;
 import com.redartedgames.ball.objects.GameObject;
@@ -28,6 +29,13 @@ public class GameScreen extends MyScreen{
 	
 	public void removeGameObject(GameObject object) {
 		world.getGameObjects().remove(object);
+	}
+
+	@Override
+	public void update(float delta) {
+		if(!((GameWorld) world).isPause) {
+			super.update(delta);
+		}
 	}
 
 }

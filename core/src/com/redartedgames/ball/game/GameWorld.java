@@ -96,6 +96,19 @@ public class GameWorld extends World{
 		impsCollection = new ImpsCollection();
 		nextLvlRect.visibility = 1f;
 	}
+
+	public void pause() {
+		isPause = true;
+		gameObjects.add(pause);
+	}
+
+	public void unpause() {
+		isPause = false;
+		gameObjects.remove(pause);
+	}
+
+	SpriteObject pause;
+	public Boolean isPause = false;
 	
 	public GameWorld() {
 		super(); 
@@ -112,7 +125,8 @@ public class GameWorld extends World{
 
 		restart(LauncherSettings.startLvl);
 		blackScreenAnimation = new BlackScreenAnimation();
-		
+		pause = new SpriteObject(Consts.gameWidth/2, Consts.gameHeight/2, null, 0); pause.addTexture("graphic/pause.png");
+		pause.priority = 2;
 	}
 	
 	public void restartLvl() {

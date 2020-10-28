@@ -168,8 +168,7 @@ public class StoryBase {
 			"",
 			
 			"Let\'s get it started!\n\n" +
-			"\nA / LEFT - left\n\nD / RIGHT - right\n\nW / UP - jump\n\nSPACE - time travel\n\nR - restart level\n\nENTER - start level\n" +
-			"",
+			"Press Esc anytime to pause the game and see the keyboard controls",
 
 			"Hold W / UP to jump" +
 			"",
@@ -180,9 +179,9 @@ public class StoryBase {
 			
 			"You can jump in the air after sliding off",
 
-			"Did you know you can do a double jump?",
+			"Did you know you can perform a double jump?",
 
-			"Let\'s see what you learnt",
+			"Let\'s see what you learned",
 			
 			"Hold SPACE to travel backward in time",
 			
@@ -212,7 +211,7 @@ public class StoryBase {
 			
 			"It isn\'t that complicated, right?",
 			
-			"First time in the history. Blue imp and a red one. Together. ",
+			"First time in the history. A blue imp and a red one. Together. ",
 			
 			"This is the end of the demo\n\nThanks for playing :)\n\nGame developers hate him! \nHe finished all levels using this one weird trick. See how...",
 			

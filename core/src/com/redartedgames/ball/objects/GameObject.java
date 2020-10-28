@@ -23,7 +23,7 @@ public class GameObject implements Editorable{
 		public void setPlayer(Player player) {
 			
 		}
-		public static int priorities = 2;
+		public static int priorities = 3;
 		public int priority = 0;
 		public int id;
 		protected Movement movement;

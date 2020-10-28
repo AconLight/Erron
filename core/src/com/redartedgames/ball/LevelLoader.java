@@ -31,10 +31,10 @@ public class LevelLoader {
 		ArrayList<ReversableObject> objects = new ArrayList<ReversableObject>();		
 		switch (levelId) {
 		case 0: {
-			for (int i = 0; i < 9; i++)
-				for (int j = 0; j < 4; j++) {
-					objects.add(new Ball(1200+ i*45, 800-j*50, 30, 1, BehaviorMode.dynamic, null, 0));
-				}
+//			for (int i = 0; i < 9; i++)
+//				for (int j = 0; j < 4; j++) {
+//					objects.add(new Ball(1200+ i*45, 800-j*50, 30, 1, BehaviorMode.dynamic, null, 0));
+//				}
 				
 			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(975, 30, 2060, 160, BehaviorMode.kinematic, null, 0));

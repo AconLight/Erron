@@ -22,6 +22,7 @@ import com.redartedgames.ball.map.MapWorld;
 import com.redartedgames.ball.menu.MenuInputHandler;
 import com.redartedgames.ball.menu.MenuScreen;
 import com.redartedgames.ball.menu.MenuWorld;
+import com.redartedgames.ball.objects.SpriteObject;
 import com.redartedgames.ball.screen.Consts;
 import com.redartedgames.ball.sound.SoundHandler;
 import com.redartedgames.ball.splash.SplashScreen;
@@ -131,7 +132,7 @@ public class BallGame extends Game{
 			
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			for(int i = 0; i < updateFrames; i++)
-			gameScreen.update(0.01f);
+				gameScreen.update(0.01f);
 			
 			gameScreen.render();
 			if (Gdx.graphics.getDeltaTime()/updateFrames > frameTime) {

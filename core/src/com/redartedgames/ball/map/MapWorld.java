@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.redartedgames.ball.consts.LauncherSettings;
 import com.redartedgames.ball.myobjects.LvlIcon;
+import com.redartedgames.ball.objects.SpriteObject;
 import com.redartedgames.ball.screen.Consts;
 import com.redartedgames.ball.screen.World;
 
@@ -32,6 +33,8 @@ public class MapWorld extends World{
 		selectedId = 0;
 		gameObjects.clear();
 		gameObjects.addAll(lvls);
+		SpriteObject map_esc = new SpriteObject(Consts.gameWidth/2, Consts.gameHeight/2, null, 0); map_esc.addTexture("graphic/menu/mapesc.png");
+		gameObjects.add(map_esc);
 	}
 	public MapWorld() {
 		super(); 

@@ -113,12 +113,20 @@ public class InputHandler implements InputProcessor{
 			break;
 		}
 		case Keys.ENTER: {
+			if (world.isPause) {
+				world.unpause();
+			}
 			if (world.dialogHero != null) world.dialogHero.acceptDialogOptions();
 			if (world.isBreak && world.breakTime > 2f) world.breakContinue = true;
 			break;
 		}
 		case Keys.ESCAPE: {
-			world.state.setMenu();
+			if (world.isPause) {
+				world.unpause();
+				world.state.setMenu();
+			} else {
+				world.pause();
+			}
 			break;
 		}
 		}
