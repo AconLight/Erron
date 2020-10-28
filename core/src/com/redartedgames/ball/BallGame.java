@@ -105,7 +105,7 @@ public class BallGame extends Game{
 			case 0: {
 				splashTime += 0.01f;
 				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-				Gdx.gl.glClearColor(0/255f, 0/255f, 0/255f, 1);
+				Gdx.gl.glClearColor(220/255f, 220/255f, 220/255f, 1);
 				for(int i = 0; i < 5; i++)
 					splashScreen.update(0.01f);
 				splashScreen.render();
@@ -117,7 +117,7 @@ public class BallGame extends Game{
 			}
 		case 1: {
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-			Gdx.gl.glClearColor(62/255f, 136/255f, 133/255f, 1);
+			Gdx.gl.glClearColor(250/255f, 180/255f, 180/255f, 1);
 			for(int i = 0; i < 5; i++)
 			menuScreen.update(0.01f);
 			menuScreen.render();

@@ -22,7 +22,7 @@ import com.redartedgames.ball.screen.World;
 
 public class MenuRenderer extends ScreenRenderer{
 
-	Color c1 = new Color(107/255f, 224/255f, 190/255f, 1);
+	Color c1 = new Color(210/255f, 60/255f, 60/255f, 1);
 	int h1[], h2[];
 	int h1l, h2l;
 	Random rand;
@@ -62,7 +62,6 @@ public class MenuRenderer extends ScreenRenderer{
 			if (z < 0) z = 0;
 			h2[i2] = (int) (Math.sin((i2+rand.nextInt(2)-1)/90f*v)*70 + Math.sin((i2+rand.nextInt(2)-1)/15f*v)*40)  + (int)(Math.sqrt(i2))*8 + z*2 + 110-100;
 		}
-		Biom biom = new Biom();
 	}
 	float position = 0;
 	
