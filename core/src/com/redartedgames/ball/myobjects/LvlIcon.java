@@ -30,7 +30,6 @@ public class LvlIcon extends GameObject{
 	public LvlIcon(float x, float y, int numb) {
 		super(x, y, 0, null);
 		this.numb = numb;
-		this.numb = 20;
 		font = Consts2.Font(60);
 		label = "" + numb;
 		rectFrameSelected = new SpriteObject(x+50, y+50, null, 0);
@@ -52,7 +51,7 @@ public class LvlIcon extends GameObject{
 	}
 	
 	public void select() {
-		if (numb > LauncherSettings.maxLevel || true) {
+		if (numb > LauncherSettings.maxLevel) {
 			Gdx.app.log("lvlIcon", LauncherSettings.maxLevel + "");
 			rect.setColor(notAllowed.r, notAllowed.g, notAllowed.b, 0.7f);
 		} else {
@@ -62,7 +61,7 @@ public class LvlIcon extends GameObject{
 	}
 	
 	public void deselect() {
-		if (numb > LauncherSettings.maxLevel || true) {
+		if (numb > LauncherSettings.maxLevel) {
 			rect.setColor(notAllowed.r, notAllowed.g, notAllowed.b, 0.6f);
 		} else {
 			rect.setColor(allowed.r, allowed.g, allowed.b, 0.3f);

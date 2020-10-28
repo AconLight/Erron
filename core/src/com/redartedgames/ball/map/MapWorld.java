@@ -49,7 +49,7 @@ public class MapWorld extends World{
 	}
 	
 	public void pressEnter() {
-		if (LauncherSettings.maxLevel >= selectedId + 1 || true) {
+		if (LauncherSettings.maxLevel >= selectedId + 1) {
 			LauncherSettings.startLvl = selectedId + 1;
 			this.state.setGame();
 		}
@@ -64,14 +64,13 @@ public class MapWorld extends World{
 	}
 	
 	public void moveSelectedRight() {
-		if (selectedId < ii*jj + 1) {
-			// lvls.get(0).deselect();
-			lvls.get(selectedId).deselect();
-			selectedId++;
-			lvls.get(selectedId).select();
-		}
-		for (LvlIcon lvl: lvls) {
-			Gdx.app.log("mapWorld", lvl.label + ", " + lvl.isSelected);
+		if (LauncherSettings.maxLevel >= selectedId + 2) {
+			if (selectedId < ii * jj + 1) {
+				// lvls.get(0).deselect();
+				lvls.get(selectedId).deselect();
+				selectedId++;
+				lvls.get(selectedId).select();
+			}
 		}
 	}
 	
@@ -94,21 +93,19 @@ public class MapWorld extends World{
 	}
 	
 	public void moveSelectedDown() {
-		if (selectedId < (ii-1)*jj) {
-			lvls.get(selectedId).deselect();
-			selectedId+=jj;
-			lvls.get(selectedId).select();
-		}
-		else if (selectedId >= 17 && selectedId <= 19) {
-			lvls.get(selectedId).deselect();
-			selectedId = 21;
-			lvls.get(selectedId).select();
-		}
-		else if (selectedId >= 15 && selectedId <= 16) {
-			lvls.get(selectedId).deselect();
-			selectedId = 20;
-			lvls.get(selectedId).select();
-		}
+			if (selectedId < (ii - 1) * jj && LauncherSettings.maxLevel >= selectedId + 1 + jj) {
+				lvls.get(selectedId).deselect();
+				selectedId += jj;
+				lvls.get(selectedId).select();
+			} else if (selectedId >= 17 && selectedId <= 19 && LauncherSettings.maxLevel >= 22) {
+				lvls.get(selectedId).deselect();
+				selectedId = 21;
+				lvls.get(selectedId).select();
+			} else if (selectedId >= 15 && selectedId <= 16 && LauncherSettings.maxLevel >= 21) {
+				lvls.get(selectedId).deselect();
+				selectedId = 20;
+				lvls.get(selectedId).select();
+			}
 	}
 
 }

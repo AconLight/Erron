@@ -24,17 +24,31 @@ public class InputHandler implements InputProcessor{
 	
 	@Override
 	public boolean keyDown(int keycode) {
-		
+
+		switch(keycode) {
+			case Keys.ESCAPE: {
+				break;
+			}
+			default: {
+				if (world.isBreak && world.breakTime > 40f) world.breakContinue = true;
+			}
+
+		}
+
 		switch(keycode) {
 		
 		case Keys.A: {
-			world.player.addXAxis(-PlayerConsts.MOVE_X);
-			world.player.hasAPressed = true;
+			if (!world.player.hasAPressed) {
+				world.player.addXAxis(-PlayerConsts.MOVE_X);
+				world.player.hasAPressed = true;
+			}
 			break;
 		}
 		case Keys.D: {
-			world.player.addXAxis(PlayerConsts.MOVE_X);
-			world.player.hasDPressed = true;
+			if (!world.player.hasDPressed) {
+				world.player.addXAxis(PlayerConsts.MOVE_X);
+				world.player.hasDPressed = true;
+			}
 			break;
 		}
 		case Keys.S: {
@@ -47,13 +61,17 @@ public class InputHandler implements InputProcessor{
 			break;
 		}
 		case Keys.LEFT: {
-			world.player.addXAxis(-PlayerConsts.MOVE_X);
-			world.player.hasAPressed = true;
+			if (!world.player.hasAPressed) {
+				world.player.addXAxis(-PlayerConsts.MOVE_X);
+				world.player.hasAPressed = true;
+			}
 			break;
 		}
 		case Keys.RIGHT: {
-			world.player.addXAxis(PlayerConsts.MOVE_X);
-			world.player.hasDPressed = true;
+			if (!world.player.hasDPressed) {
+				world.player.addXAxis(PlayerConsts.MOVE_X);
+				world.player.hasDPressed = true;
+			}
 			break;
 		}
 		case Keys.UP: {
@@ -96,7 +114,7 @@ public class InputHandler implements InputProcessor{
 		}
 		case Keys.ENTER: {
 			if (world.dialogHero != null) world.dialogHero.acceptDialogOptions();
-			if (world.isBreak) world.breakContinue = true;
+			if (world.isBreak && world.breakTime > 2f) world.breakContinue = true;
 			break;
 		}
 		case Keys.ESCAPE: {
@@ -112,14 +130,18 @@ public class InputHandler implements InputProcessor{
 
 		switch(keycode) {
 		case Keys.A: {
-			if (world.player.hasAPressed)
-			world.player.addXAxis(PlayerConsts.MOVE_X);
+			if (world.player.hasAPressed) {
+				world.player.addXAxis(PlayerConsts.MOVE_X);
+				world.player.hasAPressed = false;
+			}
 			//Gdx.app.log("InputHandler", "A");
 			break;
 		}
 		case Keys.D: {
-			if (world.player.hasDPressed)
-			world.player.addXAxis(-PlayerConsts.MOVE_X);
+			if (world.player.hasDPressed) {
+				world.player.addXAxis(-PlayerConsts.MOVE_X);
+				world.player.hasDPressed = false;
+			}
 			break;
 		}
 		case Keys.W: {
@@ -127,14 +149,18 @@ public class InputHandler implements InputProcessor{
 			break;
 		}
 		case Keys.LEFT: {
-			if (world.player.hasAPressed)
-			world.player.addXAxis(PlayerConsts.MOVE_X);
+			if (world.player.hasAPressed) {
+				world.player.addXAxis(PlayerConsts.MOVE_X);
+				world.player.hasAPressed = false;
+			}
 			//Gdx.app.log("InputHandler", "A");
 			break;
 		}
 		case Keys.RIGHT: {
-			if (world.player.hasDPressed)
-			world.player.addXAxis(-PlayerConsts.MOVE_X);
+			if (world.player.hasDPressed) {
+				world.player.addXAxis(-PlayerConsts.MOVE_X);
+				world.player.hasDPressed = false;
+			}
 			break;
 		}
 		case Keys.UP: {

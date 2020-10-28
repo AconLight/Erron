@@ -121,6 +121,8 @@ public class GameWorld extends World{
 		timeNextLvl = 0;
 		isNextLvl  = true;
 	}
+
+	float breakTime = 0f;
 	
 	@Override
 	public void update(float delta) {
@@ -158,11 +160,13 @@ public class GameWorld extends World{
 				gameObjects.add(nextLvlRect);
 				//isNextLvl = false;
 				isBreak = true;
+				breakTime = 0f;
 				blackScreenAnimation.reset();
 				breakContinue = false;
 				breakWindow.storyText.isOn = true;
 			}
 			if (isBreak) {
+				breakTime += delta;
 				blackScreenAnimation.update(delta);
 				if (blackScreenAnimation.hasEnded && blackScreenAnimation.direction < 0 && breakContinue) blackScreenAnimation.animateOn();
 				if (blackScreenAnimation.hasEnded && blackScreenAnimation.direction > 0) {

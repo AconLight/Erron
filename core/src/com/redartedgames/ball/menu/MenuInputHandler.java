@@ -21,7 +21,7 @@ public class MenuInputHandler implements InputProcessor {
 			break;
 		}
 		case Keys.SPACE: {
-			menuWorld.isForward = false;
+			menuWorld.pressEnter();
 			break;
 		}
 		case Keys.W: {
@@ -48,12 +48,7 @@ public class MenuInputHandler implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		switch (keycode) {
-		case Keys.SPACE: {
-			menuWorld.isForward = true;
-			break;
-		}
-		}
+
 		return false;
 	}
 

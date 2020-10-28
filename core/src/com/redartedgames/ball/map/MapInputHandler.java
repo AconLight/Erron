@@ -41,6 +41,22 @@ public class MapInputHandler implements InputProcessor {
 			menuWorld.moveSelectedRight();
 			break;
 		}
+			case Keys.UP: {
+				menuWorld.moveSelectedUp();
+				break;
+			}
+			case Keys.DOWN: {
+				menuWorld.moveSelectedDown();
+				break;
+			}
+			case Keys.LEFT: {
+				menuWorld.moveSelectedLeft();
+				break;
+			}
+			case Keys.RIGHT: {
+				menuWorld.moveSelectedRight();
+				break;
+			}
 		
 		}
 		return false;
