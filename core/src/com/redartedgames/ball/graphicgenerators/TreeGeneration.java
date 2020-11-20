@@ -36,7 +36,7 @@ public class TreeGeneration extends Game{
 		for (int i = 50; i < n; i++) {
 			TreeGenerator.mutate(i, n + 10);
 			TreeGenerator.generate(i);
-			Gdx.app.log("tree i:", "" + i);
+
 		}
 		Gdx.app.exit();
 

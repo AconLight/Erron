@@ -100,38 +100,38 @@ public class TreeGenerator {
 	static float doGory = 1;
 	static float thickness2 = 10;
 	static float thicknessRate = 0.8f;
-	static float radiusLengthRate = 1.15f; // mnoznik promienia  dla > 1 r maleje   ()
-	static float radiusSmoothRate = 1.8f; // wyg³adzenie skracania - d¹¿y do 1 przy inf, do n przy 1
-	static float radiusScale = 10; //d³ugoœæ ga³êzi (ostatniej)
+	static float radiusLengthRate = 1.15f;
+	static float radiusSmoothRate = 1.8f;
+	static float radiusScale = 10;
 	static float alfaDelta = 1f;
 	static float alfaRate = 1.1f;
-	static float wazkosc = 2.2f; //w¹zkoœæ ca³ego drzewa         (2.2 - 3.5)
-	static float losowosc2 = 150f; //rozpiêtoœæ na dole          (5 - 150)
-	static float losowoscDelta = 1.5f; //rozpiêtoœæ na górze   (1.1 - 1.5)
+	static float wazkosc = 2.2f;
+	static float losowosc2 = 150f;
+	static float losowoscDelta = 1.5f;
 	
 	static float maxdoGory = 1;
 	static float maxthickness2 = 10;
 	static float maxthicknessRate = 0.8f;
-	static float maxradiusLengthRate = 3f; // mnoznik promienia  dla > 1 r maleje   ()
-	static float maxradiusSmoothRate = 100f; // wyg³adzenie skracania - d¹¿y do 1 przy inf, do n przy 1
-	static float maxradiusScale = 10; //d³ugoœæ ga³êzi (ostatniej)
+	static float maxradiusLengthRate = 3f;
+	static float maxradiusSmoothRate = 100f;
+	static float maxradiusScale = 10;
 	static float maxalfaDelta = 1f;
 	static float maxalfaRate = 1.1f;
-	static float maxwazkosc = 3.5f; //w¹zkoœæ ca³ego drzewa         (2.2 - 3.5)
-	static float maxlosowosc2 = 150f; //rozpiêtoœæ na dole          (5 - 150)
-	static float maxlosowoscDelta = 1.5f; //rozpiêtoœæ na górze   (1.1 - 1.5)
+	static float maxwazkosc = 3.5f;
+	static float maxlosowosc2 = 150f;
+	static float maxlosowoscDelta = 1.5f;
 	
 	static float mindoGory = 1;
 	static float minthickness2 = 10;
 	static float minthicknessRate = 0.8f;
-	static float minradiusLengthRate = 1.01f; // mnoznik promienia  dla > 1 r maleje   ()
-	static float minradiusSmoothRate = 1f; // wyg³adzenie skracania - d¹¿y do 1 przy inf, do n przy 1
-	static float minradiusScale = 5; //d³ugoœæ ga³êzi (ostatniej)
+	static float minradiusLengthRate = 1.01f;
+	static float minradiusSmoothRate = 1f;
+	static float minradiusScale = 5;
 	static float minalfaDelta = 1f;
 	static float minalfaRate = 1.1f;
-	static float minwazkosc = 2.2f; //w¹zkoœæ ca³ego drzewa         (2.2 - 3.5)
-	static float minlosowosc2 = 5f; //rozpiêtoœæ na dole          (5 - 150)
-	static float minlosowoscDelta = 1.1f; //rozpiêtoœæ na górze   (1.1 - 1.5)
+	static float minwazkosc = 2.2f;
+	static float minlosowosc2 = 5f;
+	static float minlosowoscDelta = 1.1f;
 	
 	static Random rand = new Random();
 	
@@ -279,7 +279,7 @@ public class TreeGenerator {
 		
 		
 		double delta = -ab - (centerAngle + g*Math.PI/2);
-		//Gdx.app.log("delta", delta+ "");
+
 
 		
 		centerAngle = (float) (-ab - delta - g*Math.PI/2);

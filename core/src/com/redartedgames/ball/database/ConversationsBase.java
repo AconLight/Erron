@@ -16,16 +16,6 @@ public class ConversationsBase {
 	private static int recordNumber = 7;
 	public static void load() {
 		combinations = new ArrayList<>();
-		/*
-		example = example.replace("œ", "s");
-		example = example.replace("¹", "a");
-		example = example.replace("¿", "z");
-		example = example.replace("ó", "o");
-		example = example.replace("³", "l");
-		example = example.replace("ñ", "n");
-		example = example.replace("æ", "c");
-		example = example.replace("ê", "e");
-		*/
 		convertStory(example);
 	}
 	
@@ -51,21 +41,6 @@ public class ConversationsBase {
 	public static void tryFirstLoad() {
 		prefs.clear();
 		prefs.flush();
-		if (!prefs.contains("firstLoad")) {
-			//Gdx.app.log("ConversationBase", "tryFirstLoad");
-			prefs.putString("firstLoad", "true");
-			prefs.putString("1", "1");
-			prefs.putString("1v", "Lubi³eœ napiæ siê dobrego piwa. Mo¿e nie zna³eœ siê na gatunkach, ale mia³eœ talent do zapamiêtywania smaków i potrafi³eœ je szczegó³owo porównywaæ na wielu p³aszczyznach.");
-			prefs.putString("2", "2");
-			prefs.putString("2v", "Sznur do æwieczenia wêz³ów ¿eglarskich by³ ciekawym prezentem, zachêca³ do spróbowania czegoœ nowego.");
-			prefs.putString("3", "3");
-			prefs.putString("3v", "Szafa to szafa - nic szczególnego");
-			prefs.putString("4", "2 3");
-			prefs.putString("4v", "Mo¿e sznur w szafie to nie jest codzienny widok, ale naprawdê nie by³o dla niego lepszego miejsca.");
-			prefs.putString("5", "1 2 3");
-			prefs.putString("5v", "Mówi³eœ na to \"plan B w szafie\". Gdyby nie alkohol, nigdy by to nie wysz³o z formy ¿artu.");
-			prefs.flush();
-		}
 		
 	}
 	
@@ -94,9 +69,5 @@ public class ConversationsBase {
 		}
 	}
 	
-	static String example = "(1)Butelka, troche zalatuje alkoholem... " 
-			+ "(2)Sznur do æwieczenia wêz³ów ¿eglarskich by³ ciekawym prezentem, zachêca³ do spróbowania czegoœ nowego."
-			+ "(3)Szafa to szafa - nic szczególnego "
-			+ "(2 3)Mo¿e sznur w szafie to nie jest codzienny widok, ale naprawdê nie by³o dla niego lepszego miejsca. "
-			+ "(1 2 3)Mówi³eœ na to \'plan B w szafie\'. Gdyby nie alkohol, nigdy by to nie wysz³o z formy ¿artu. ";
+	static String example = "";
 }

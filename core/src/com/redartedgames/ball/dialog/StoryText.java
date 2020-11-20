@@ -48,7 +48,7 @@ public class StoryText {
 		parameter.borderWidth = 1;
 		parameter.borderColor = Color.WHITE;
 		parameter.characters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM�󳜹�����ӣ������1234567890.,?!':_-()/";
-		System.out.println("czcionka");
+		//System.out.println("czcionka");
 		System.out.println();
 		font = generator.generateFont(parameter); // font size 12 pixels
 		generator.dispose(); // don't forget to dispose to avoid memory leaks!

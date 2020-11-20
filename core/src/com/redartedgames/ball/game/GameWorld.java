@@ -54,14 +54,18 @@ public class GameWorld extends World{
 	public void restart() {
 		restart(levelId);
 	}
-	
+
+	float hintTime = 0;
+
 	private void load() {
 		if (LauncherSettings.startLvl > 22) {
 			LauncherSettings.startLvl = 1;
 			this.state.setMenu();
 		}
+		LauncherSettings.startLvl = levelId;
 		reversableObjects.addAll(LevelLoader.getLevel(levelId, player, impsCollection, this));
 		reversableObjects.add(player);
+		player.setHints(levelId);
 		gameObjects.addAll(reversableObjects);
 		
 		for (GameObject obj : reversableObjects) {
@@ -92,7 +96,8 @@ public class GameWorld extends World{
 		i = 0;
 		reversableObjects = new ArrayList<ReversableObject>();
 		isForward = true;	
-		player = new Player(0, 250, 1f, null, 10);	
+		player = new Player(40, 250, 1f, null, 10);
+		player.setHints(levelId);
 		impsCollection = new ImpsCollection();
 		nextLvlRect.visibility = 1f;
 	}
@@ -140,16 +145,21 @@ public class GameWorld extends World{
 	
 	@Override
 	public void update(float delta) {
+		hintTime += delta;
+		player.hintTime = hintTime;
 		if (!isNextLvl) {
 			nextLvlRect.visibility-=delta/10;
 			if (nextLvlRect.visibility < 0) nextLvlRect.visibility = 0;
 			
 			timeManagerUpdate(delta);
 			if (player.getPosition().x > Consts.gameWidth) {
+				if (LauncherSettings.saveHints) {
+					player.particles.saveAllFrames(levelId);
+				}
 				LauncherSettings.startLvl++;
-				LauncherSettings.maxLevel = LauncherSettings.startLvl;
+				LauncherSettings.maxLevel = Math.max(LauncherSettings.maxLevel, LauncherSettings.startLvl);
 				Preferences prefs = Gdx.app.getPreferences("maxLavel");
-				prefs.putInteger("value", LauncherSettings.startLvl);
+				prefs.putInteger("value", LauncherSettings.maxLevel);
 				prefs.flush();
 				timeNextLvl = 0;
 				isNextLvl  = true;
@@ -169,6 +179,7 @@ public class GameWorld extends World{
 			if (timeNextLvl > 10 && !isBreak) {
 				gameObjects.clear();
 				gameObjects.add(nextLvlRect); ///  +1
+				hintTime = 0;
 				restart(levelId);
 				gameObjects.remove(nextLvlRect);
 				gameObjects.add(nextLvlRect);
@@ -218,8 +229,8 @@ public class GameWorld extends World{
 		
 		
 		if (!isForward)  {
-			timeNum -= timeNumNormal*delta/4;
-			if (timeNum < timeNumNormal*2) timeNum = timeNumNormal*2;
+			timeNum -= timeNumNormal*delta/8;
+			if (timeNum < timeNumNormal*0.9f) timeNum = timeNumNormal*0.9f;
 		}
 		else {
 			timeNum = timeNumNormal;

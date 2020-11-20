@@ -205,7 +205,7 @@ public class GameObject implements Editorable{
 		@Override
 		public void moveBig(int x, int y) {
 			transform(x, y);
-			Gdx.app.log("Game Object", "moveBig");
+//			Gdx.app.log("Game Object", "moveBig");
 		}
 		
 		@Override

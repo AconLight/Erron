@@ -11,4 +11,5 @@ public class LauncherSettings {
 	public static int startLvl = 1;
 	public static int maxLevel = 1;
 	static boolean isEditor = false;
+	public static boolean saveHints = false;
 }

@@ -20,7 +20,7 @@ public class Hint extends ReversableObject {
         super.render(batch, priority);
         for (GameObject obj: gameObjects) {
             obj.render(batch, priority);
-            Gdx.app.log("asd", "render");
+
         }
     }
 }

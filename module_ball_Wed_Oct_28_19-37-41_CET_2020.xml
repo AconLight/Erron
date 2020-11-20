@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_ball" default="compile.module.ball">
+  <dirname property="module.ball.basedir" file="${ant.file.module_ball}"/>
+  
+  <property name="module.jdk.home.ball" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.ball" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.ball" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.ball" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="ball.output.dir" value="${module.ball.basedir}/classes/production/ball"/>
+  <property name="ball.testoutput.dir" value="${module.ball.basedir}/classes/test/ball"/>
+  
+  <path id="ball.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ball.module.production.classpath">
+    <path refid="${module.jdk.classpath.ball}"/>
+  </path>
+  
+  <path id="ball.runtime.production.module.classpath">
+    <pathelement location="${ball.output.dir}"/>
+  </path>
+  
+  <path id="ball.module.classpath">
+    <path refid="${module.jdk.classpath.ball}"/>
+    <pathelement location="${ball.output.dir}"/>
+  </path>
+  
+  <path id="ball.runtime.module.classpath">
+    <pathelement location="${ball.testoutput.dir}"/>
+    <pathelement location="${ball.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ball">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ball">
+    <patternset refid="excluded.from.module.ball"/>
+  </patternset>
+  
+  
+  <target name="compile.module.ball" depends="compile.module.ball.production,compile.module.ball.tests" description="Compile module ball"/>
+  
+  <target name="compile.module.ball.production" depends="register.custom.compilers" description="Compile module ball; production classes"/>
+  
+  <target name="compile.module.ball.tests" depends="register.custom.compilers,compile.module.ball.production" description="compile module ball; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ball" description="cleanup module">
+    <delete dir="${ball.output.dir}"/>
+    <delete dir="${ball.testoutput.dir}"/>
+  </target>
+</project>

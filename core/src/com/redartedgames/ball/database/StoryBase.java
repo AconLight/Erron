@@ -50,15 +50,8 @@ public class StoryBase {
 		if (id < stories.length) story = stories[id];
 		else story = "dddd";
 		
-		Gdx.app.log("StoryBase", "load" + id);
-		/*story = story.replace("�", "s");
-		story = story.replace("�", "a");
-		story = story.replace("�", "z");
-		story = story.replace("�", "o");
-		story = story.replace("�", "l");
-		story = story.replace("�", "n");
-		story = story.replace("�", "c");
-		story = story.replace("�", "e");*/
+//		Gdx.app.log("StoryBase", "load" + id);
+
 		
 		
 		convertStory(story);
@@ -70,7 +63,7 @@ public class StoryBase {
 		for(int i = 0; i < recordNumber; i++) {
 			//Gdx.app.log("ConversationBase", "iteration");
 			if(prefs.contains("" + (i+1)) && prefs.contains((i+1) + "v")) {
-				Gdx.app.log("ConversationBase", "contains: " + prefs.getString("" + (i+1)));
+//				Gdx.app.log("ConversationBase", "contains: " + prefs.getString("" + (i+1)));
 				
 				combinations.add(new Combination(prefs.getString("" + (i+1)), prefs.getString((i+1) + "v")));
 			}
@@ -225,15 +218,7 @@ public class StoryBase {
 	};
 	
 	static String[] stories = {
-			"To wspomnienie dotyczy ostatniego wieczoru. (1)Jak zwykle w pi�tek oko�o godziny osiemnastej pi�e� piwo i gra�e� na komputerze. @"
-			+ "Trwa�o to mniej wi�cej cztery godziny. (1 2 3)Po jakim� czasie zacz��e� si� kreci� po pokoju z nud�w. W ko�cu stan��e� przed szaf�. @"
-			+ " (2 3)Otworzy�e� szaf� i skierowa�e� sw�j pijany wzrok na sznur. @(2)Zawi�zanie w�z�a by�o zaskakuj�co proste. @(3) Spojrza�e� na szaf�, wydawa�a si� do�c wysoka, ale mi�dzy ni� a sufitem by�o du�o miejsca. @"
-			+ "Chcia�e� po sobie co� zostawi�... Niestety nic ci nie przychodzi�o do g�owy, wi�c napisa�e� tylko: 'game over'.\n",
-			
-			"(4)W�a�nie sko�czy�e� gr�. (5)Nie by�o to nic specjalnego, ale troch� czasu nad tym sp�dzi�e�. (6)Wspomnienia gracza, kt�re pozna�e�, by�y zadziwiaj�co znajome. @Tak jakby by�a to osoba, kt�r� zna�e�. "
-			+ "(2 6)Co wi�cej nie by�y to zabawne wspomnienia, a gracz sko�czy� do�� nieciekawie. (4 6)Jednak najbardziej ciekawi� ci� fakt, �e gracz wspomnia�, �e nie jest mo�liwe, aby gra udost�pnia�a czyje� wspomnienia, bo gdyby tak by�o, to i tak pierwszy gracz nie mia�by od kogo tych wspomnie� uzyska� i zosta�o by to w jego wspomnieniach zaznaczone, a kolejni gracze z pewno�ci� by przekazywali ten fakt dalej. @"
-			+ "No chyba, �e pierwszy gracz uzyska� by wspomnienia ostatniego gracza.... (5 6)Ale wtedy musia�by przenie�� si� w czasie, co nie jest mo�liwe... Musia�by tak�e wiedzie�, kto zostanie ostatnim graczem.. @"
-			+ "W ka�dym razie czu�e� si� mocno zagubiony i nie by�o to wcale przyjemne, raczej do�uj�ce."
+			""
 					
 	};
 }

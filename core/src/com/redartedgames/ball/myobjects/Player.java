@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.redartedgames.ball.consts.LauncherSettings;
 import com.redartedgames.ball.consts.PlayerConsts;
 import com.redartedgames.ball.database.EasterEggsBase;
 import com.redartedgames.ball.dialog.Conversation;
@@ -20,6 +21,7 @@ import com.redartedgames.ball.objects.Hitbox.BehaviorMode;
 import com.redartedgames.ball.objects.ReversableMovement;
 import com.redartedgames.ball.objects.ReversableObject;
 import com.redartedgames.ball.objects.SpriteObject;
+import com.redartedgames.ball.screen.Consts;
 import com.redartedgames.ball.sound.SoundHandler;
 
 public class Player extends Ball{
@@ -41,7 +43,7 @@ public class Player extends Ball{
 	
 	public SpriteObject playerSprite, playerEyes, playerEyesImp, playerSmile, playerHat, playerFrozen;
 	
-	private RectParticles particles;
+	public RectParticles particles, hints;
 	
 	public boolean isAlive;
 	
@@ -54,6 +56,14 @@ public class Player extends Ball{
 	protected ArrayList<SpriteObject> core, hat, external;
 	
 	public float scl = 1;
+
+	public void setHints(int lvl) {
+		hints = new RectParticles(12);
+		hints.loadFrames(lvl);
+		hint_lvl = lvl;
+	}
+
+	private int hint_lvl = 1;
 	
 	public Player(float x, float y, float m, GameObject parent, int id) {
 		super(x, y, PlayerConsts.PLAYER_HITBOX_R, m, BehaviorMode.dynamic, parent, id);
@@ -145,6 +155,16 @@ public class Player extends Ball{
 				isForwardFac*forwardColor.a + (1-isForwardFac)*backwardColor.a);
 		int a;
 		float dx = 0;
+
+		if (hints != null && hints.newLoaded != null && hints.newLoaded.size() > 0) {
+			for (Vector3 v : hints.rects) {
+				sr.setColor(0.8f, 0.8f, 0.8f, (float) (v.z*0.8f*(Math.pow(Math.min(400f*hint_lvl, hintTime) / (400f*hint_lvl), 2))));
+				sr.draw(GameObject.dotTex, v.x, v.y, particles.width, particles.height);
+				//Gdx.app.log("hints render", v.x + ", " + v.y + ", " + v.z);
+			}
+			//Gdx.app.log("hints", "rendered");
+		}
+
 		for(Vector3 v: particles.rects) {
 			i++;
 			if (v.z > particles.time) {
@@ -207,7 +227,7 @@ public class Player extends Ball{
 		if((xAxis + x < PlayerConsts.MOVE_X + 0.1f) && (xAxis + x > -PlayerConsts.MOVE_X - 0.1f))
 		xAxis += x;
 	}
-	
+	public float hintTime = 0f;
 	private float side = 7.5f;
 	private float animationSide = 7.5f;
 	private float animationK = 0.1f;
@@ -243,6 +263,14 @@ public class Player extends Ball{
 		SoundHandler.szsz.setVolume(SoundHandler.szszId, 1f - 1f / ((vX*vX/10000000f*h)+1f));
 		//particles
 		particles.update(delta);
+		//Gdx.app.log("hints", "update1");
+		if (hints != null) {
+			//Gdx.app.log("hints", "update");
+			hints.update(0.01f);
+		}
+		if (LauncherSettings.saveHints) {
+			particles.saveFrame();
+		}
 		
 		//animation
 		if (((ReversableMovement)movement).getVelocityX().floatValue() > 0) {

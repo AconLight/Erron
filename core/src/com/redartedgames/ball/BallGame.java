@@ -28,6 +28,13 @@ import com.redartedgames.ball.sound.SoundHandler;
 import com.redartedgames.ball.splash.SplashScreen;
 import com.redartedgames.ball.splash.SplashWorld;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class BallGame extends Game{
 	
@@ -93,6 +100,26 @@ public class BallGame extends Game{
 		} else {
 			prefs.putInteger("value", 1);
 		}
+		if (!prefs.contains("lvl_hint_elo15")) {
+			for (int i = 1; i <= 22; i++) {
+				File file=new File("hints/hints" + i + ".txt");    //creates a new file instance
+				FileReader fr= null;   //reads the file
+				try {
+					fr = new FileReader(file);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				BufferedReader br=new BufferedReader(fr);  //creates a buffering character input stream
+				StringBuffer sb=new StringBuffer();    //constructs a string buffer with no characters
+				String line;
+				try {
+					line=br.readLine();
+					prefs.putString("lvl_hint_elo" + i, line);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+        }
 	}
 
 	int frames = 2400;
@@ -179,7 +206,7 @@ public class BallGame extends Game{
 		gameWorld.nextLvlRect.visibility = 1f;
 		Gdx.input.setInputProcessor(gameHandler);
 		time = 0;
-		SoundHandler.playGameSdNostalgic();
+		//SoundHandler.playGameSdNostalgic();
 	}
 	
 	@Override

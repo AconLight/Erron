@@ -86,7 +86,7 @@ public class LavaRect extends Rect{
 		// sr.setColor(256f/256f, 256f/256f, 0/256f, 1f);
 		if (!isFrozen) {
 			for (LavaRect rect: rects) {
-				Gdx.app.log("lavaRect", "lava: " + rect.width + ", " + rect.height);
+//				Gdx.app.log("lavaRect", "lava: " + rect.width + ", " + rect.height);
 				sr.draw(dotTex, (rect.position.x - rect.width/2+0.5f), rect.position.y - rect.height/2+0.5f, rect.width+0.5f, rect.height+0.5f);
 			}
 		}

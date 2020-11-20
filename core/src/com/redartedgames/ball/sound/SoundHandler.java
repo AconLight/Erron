@@ -14,7 +14,7 @@ public class SoundHandler {
 		szszId = szsz.play(0f);
 		szsz.setLooping(szszId, true);
 		
-		sd =  Gdx.audio.newMusic(Gdx.files.internal("sounds/sd.wav"));
+		sd =  Gdx.audio.newMusic(Gdx.files.internal("sounds/sd.mp3"));
 	}
 	
 	public static void nextLvl() {

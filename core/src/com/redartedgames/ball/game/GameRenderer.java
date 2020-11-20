@@ -117,7 +117,7 @@ public class GameRenderer extends ScreenRenderer{
 			treePosX += Consts.gameWidth*1.5f;
 			treeNumb = (int)Math.sqrt(rand2.nextInt(treesI*treesI));
 			if (rand2.nextInt(3) == 1) treeNumb = 1;
-			Gdx.app.log("renderer", "treeNumb: " + treeNumb);
+//			Gdx.app.log("renderer", "treeNumb: " + treeNumb);
 			//  treeTex = TreeGenerator.generate();
 		}
 		

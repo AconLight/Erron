@@ -52,7 +52,7 @@ public class LvlIcon extends GameObject{
 	
 	public void select() {
 		if (numb > LauncherSettings.maxLevel) {
-			Gdx.app.log("lvlIcon", LauncherSettings.maxLevel + "");
+//			Gdx.app.log("lvlIcon", LauncherSettings.maxLevel + "");
 			rect.setColor(notAllowed.r, notAllowed.g, notAllowed.b, 0.7f);
 		} else {
 			rect.setColor(allowed.r, allowed.g, allowed.b, 0.5f);

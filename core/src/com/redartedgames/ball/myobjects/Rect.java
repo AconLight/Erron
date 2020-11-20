@@ -69,7 +69,7 @@ public class Rect extends ReversableObject{
 	protected void generateBlossom() {
 		int i = 8;
 		int h = 0;
-		//góra
+
 		while(i < width/2+4) {
 			h += r.nextInt(3)-1;
 			if (h < 0) h = 1;
@@ -190,13 +190,13 @@ public class Rect extends ReversableObject{
 	@Override
 	public void moveBig(int x, int y) {
 		transform(x*25, y*25);
-		Gdx.app.log("Game Object", "moveBig");
+//		Gdx.app.log("Game Object", "moveBig");
 	}
 	
 	@Override
 	public void moveSmall(int x, int y) {
 		transform(x, y);
-		Gdx.app.log("Game Object", "moveBig");
+//		Gdx.app.log("Game Object", "moveBig");
 	}
 	
 	@Override

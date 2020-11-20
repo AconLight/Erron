@@ -66,7 +66,7 @@ public class LevelLoader {
 			e.setItem("graphic/sznur.png", 700, 300, 2);
 			player.easterEggs.add(e);
 			objects.add(e);
-			Gdx.app.log("lvlLoader", "lvl1 load");
+//			Gdx.app.log("lvlLoader", "lvl1 load");
 			player.setPosition(h.getHeadPos());
 			h.setPlayer(player);
 			objects.add(h);

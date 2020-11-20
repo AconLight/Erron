@@ -24,7 +24,7 @@ public class TimeBackItem extends ReversableObject{
 	public TimeBackItem(float x, float y, GameObject parent, int id) {
 		super(x, y, parent, id);
 		elements =  new ArrayList<>();
-		Gdx.app.log("TimeBackItem", "constructor");
+//		Gdx.app.log("TimeBackItem", "constructor");
 		stop = false;
 		fadeAway = false;
 	}
