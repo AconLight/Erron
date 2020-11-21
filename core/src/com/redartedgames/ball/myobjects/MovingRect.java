@@ -58,7 +58,7 @@ public class MovingRect extends Rect{
 			if (!((ReversableMovement) movement).getIsForward()) {
 				//dx = new BigDecimal("" + 0);
 				//dy = new BigDecimal("" + 0);
-				System.out.println("do tylu");
+				//System.out.println("do tylu");
 			}
 
 			((ReversableMovement) movement).addCollisionAcc(dx, dy);

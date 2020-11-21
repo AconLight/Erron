@@ -237,7 +237,7 @@ public class LevelLoader {
 			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(129, 80, 330, 230, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(1776, 80, 410, 204, BehaviorMode.kinematic, null, 0));
-			MovingRect m1 = new MovingRect(800, 130, 1254, 130, 270, 60, BehaviorMode.kinematic, null, 0);
+			MovingRect m1 = new MovingRect(800, 130, 1254, 130, 120, 60, BehaviorMode.kinematic, null, 0);
 			objects.add(m1);
 			
 			objects.add(new StaticButton(400, 130, m1, null, 0));
@@ -251,17 +251,20 @@ public class LevelLoader {
 		case 10: { //platforma + cofanie z platformy
 			LavaRect lava = new LavaRect(1022, 30, 1290, 70, null, 0);
 			lava.setPlayer(player);
+			MovingRect m1, m2, m3;
+			objects.add(m3 = new MovingRect(1000, 140, 1000, -2400, 100, 350, BehaviorMode.kinematic, null, 0));
 			objects.add(lava);
 			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(183, 81, 430, 247, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1800, 230, 320, 470, BehaviorMode.kinematic, null, 0));
-			MovingRect m1, m2;
-			objects.add(m1 = new MovingRect(1150, 140, 725, 140, 210, 60, BehaviorMode.kinematic, null, 0));
-			objects.add(m2 = new MovingRect(900, 300, 1775, 300, 210, 60, BehaviorMode.kinematic, null, 0));
+			objects.add(new Rect(1800, 230, 320, 700, BehaviorMode.kinematic, null, 0));
+
+			objects.add(m1 = new MovingRect(1450, 140, 625, 140, 160, 60, BehaviorMode.kinematic, null, 0));
+			objects.add(m2 = new MovingRect(800, 430, 1575, 430, 70, 60, BehaviorMode.kinematic, null, 0));
 			
 			objects.add(new StaticButton(525, 120, m1, null, 0));
 			objects.add(new StaticButton(525, 120, m2, null, 0));
-			
+			objects.add(new StaticButton(525, 120, m3, null, 0));
+
 			impsCollection.addStaticImp();
 			objects.addAll(impsCollection.getImps());
 			objects.add(impsCollection);
@@ -275,12 +278,12 @@ public class LevelLoader {
 			objects.add(lava);
 			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(129, 80, 330, 230, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1876, 80, 210, 204, BehaviorMode.kinematic, null, 0));
+			objects.add(new Rect(1876, 80, 210, 1404, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0)); 
-			MovingRect m1 = new MovingRect(701, 111, 701, 316, 180, 57, BehaviorMode.kinematic, null, 0);
+			MovingRect m1 = new MovingRect(901, 111, 901, 516, 180, 57, BehaviorMode.kinematic, null, 0);
 			objects.add(m1);
 			
-			MovingRect m2 = new MovingRect(976, 355, 1326, 355, 159, 56, BehaviorMode.kinematic, null, 0);
+			MovingRect m2 = new MovingRect(1176, 655, 1526, 655, 159, 56, BehaviorMode.kinematic, null, 0);
 			objects.add(m2);
 			
 			objects.add(new StaticButton(502, 130, m2, null, 0));

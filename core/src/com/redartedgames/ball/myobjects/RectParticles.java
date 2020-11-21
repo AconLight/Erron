@@ -16,7 +16,7 @@ public class RectParticles {
 	public String framesToSave = "";
 	Preferences prefs;
 	ArrayList<ArrayList<Vector3>> loaded;
-	ArrayList<ArrayList<Vector3>> remembered;
+	ArrayList<Vector3> remembered;
 	ArrayList<Vector3> newLoaded;
 	public int ctr = 0;
 
@@ -55,25 +55,24 @@ public class RectParticles {
 	}
 
 	public void saveFrame() {
-		remembered.add(new ArrayList<Vector3>());
-		for (Vector3 rect: rects) {
-			remembered.get(remembered.size()-1).add(new Vector3(rect.x, rect.y, rect.z));
+		float x = 0, y = 0;
+		for (Vector3 rect : rects) {
+			x += rect.x;
+			y += rect.y;
 		}
+		x /= rects.size();
+		y /= rects.size();
+		remembered.add(new Vector3(x, y, 1));
 	}
 
 	public void saveAllFrames(int lvl) {
-		for (ArrayList<Vector3> myRects: remembered) {
+		for (Vector3 rect: remembered) {
 			framesToSave += "asd";
-			for (Vector3 rect: myRects) {
-				framesToSave += "abc";
-				framesToSave += (int)(rect.x);
-				framesToSave += "dsa";
-				framesToSave += (int)rect.y;
-				framesToSave += "dsa";
-				framesToSave += (int)rect.z;
-			}
+			framesToSave += (int)(rect.x);
+			framesToSave += ",";
+			framesToSave += (int)rect.y;
 		}
-		prefs.putString("lvl_hint" + lvl, framesToSave);
+		prefs.putString("lvl_hint_elo" + lvl, framesToSave);
 		prefs.flush();
 	}
 
