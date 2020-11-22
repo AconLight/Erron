@@ -23,6 +23,7 @@ public class TimeBackItem extends ReversableObject{
 	
 	public TimeBackItem(float x, float y, GameObject parent, int id) {
 		super(x, y, parent, id);
+		((ReversableMovement)movement).ctr = 1000;
 		elements =  new ArrayList<>();
 //		Gdx.app.log("TimeBackItem", "constructor");
 		stop = false;
@@ -33,6 +34,7 @@ public class TimeBackItem extends ReversableObject{
 	
 	public void fadeAway(float x, float y) {
 		for (TimeBackElement el: elements) {
+			((ReversableMovement)el.getMovement()).ctr = 1000;
 			((ReversableMovement) el.getMovement()).setVelocityX(new BigDecimal("" + (x + rand.nextInt(101) - 50)));
 			((ReversableMovement) el.getMovement()).setVelocityY(new BigDecimal("" + (y + rand.nextInt(101) - 50)));
 			el.updateBefore(0.01f, 0, 0);
@@ -49,6 +51,7 @@ public class TimeBackItem extends ReversableObject{
 		el.launch(velocity, spin);
 		loadEtap = 0;
 		for (int i = 0; i < time; i++) {
+			((ReversableMovement)el.getMovement()).ctr = 1000;
 			el.updateBefore(0.01f, 0, 0);
 			el.applyPhysicsToAcceleration();
 			el.updateAfter(0.01f, 0, 0);
@@ -61,6 +64,7 @@ public class TimeBackItem extends ReversableObject{
 		elements.add(el);
 		el.launch(velocity, spin);
 		for (int i = 0; i < time; i++) {
+			((ReversableMovement)el.getMovement()).ctr = 1000;
 			el.updateBefore(0.01f, 0, 0);
 			el.applyPhysicsToAcceleration();
 			el.updateAfter(0.01f, 0, 0);
@@ -82,6 +86,7 @@ public class TimeBackItem extends ReversableObject{
 	
 	int asd = 0;
 	public void updateBefore(float delta, float vx, float vy) {
+		((ReversableMovement)movement).ctr = 1000;
 		if (loadEtap == 1) loadEtap = 2;
 		if(!stop) {
 			super.updateBefore(delta, vx, vy);

@@ -20,13 +20,14 @@ public class ReversableMovement extends Movement
 	public boolean isForward;
 
 	private boolean isForwardTransaction;
-	
+	public int ctr;
 	public int replacementI = 20;
 	private static float dokladnosc = 0.01f;
 	private static float v = 1000, j = 4; // do funkcji sigmoid
 	
 	public ReversableMovement(Vector2 position) {
 		super(position);
+		ctr = 0;
 		framesI = 0;
 		prevMoves = new ArrayList<ReversableMovement>();
 		isForwardTransaction = true;
@@ -100,14 +101,19 @@ public class ReversableMovement extends Movement
 		isStopped = isStoppedTransation;
 		if (!isStopped) {
 			if(isForward) {
-				framesI++; 
+				framesI++;
+				ctr++;
 				if (framesI == framesI/replacementI*replacementI) {
 					addMovement();
 					//Gdx.app.log("rev mov", "add move!!!");
 				}
 			}
 			else {
-				   
+				 if (ctr < 0) {
+				 	return;
+				 } else {
+					 ctr--;
+				 }
 				  
 				positionX = positionX.subtract(sigmoid(velocityX, v).multiply(delta2));
 				positionY = positionY.subtract(sigmoid(velocityY, v).multiply(delta2));	
@@ -123,6 +129,9 @@ public class ReversableMovement extends Movement
 	}
 	public void updateAfter(float delta) {
 		if(!isStopped) {
+			if (ctr < 0) {
+				return;
+			}
 			if(isForward) {
 				accelerationX = accelerationX.subtract(velocityX.multiply(dragKX));
 				accelerationY = accelerationY.subtract(velocityY.multiply(dragKY));
