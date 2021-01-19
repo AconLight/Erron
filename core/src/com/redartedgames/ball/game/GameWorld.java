@@ -100,6 +100,7 @@ public class GameWorld extends World{
 		player.setHints(levelId);
 		impsCollection = new ImpsCollection();
 		nextLvlRect.visibility = 1f;
+		blackScreenAnimation.comic.load(levelId);
 	}
 
 	public void pause() {
@@ -123,13 +124,14 @@ public class GameWorld extends World{
 		nextLvlRect.sclX = Consts.gameWidth;
 		nextLvlRect.sclY = Consts.gameHeight;
 		nextLvlRect.visibility = 1f;
-		nextLvlRect.R = 0.08f;
-		nextLvlRect.G = 0.08f;
-		nextLvlRect.B = 0.08f;
-		gameObjects.add(nextLvlRect);
+		nextLvlRect.R = 0.00f;
+		nextLvlRect.G = 0.00f;
+		nextLvlRect.B = 0.00f;
+		//gameObjects.add(nextLvlRect);
 
-		restart(LauncherSettings.startLvl);
+
 		blackScreenAnimation = new BlackScreenAnimation();
+		restart(LauncherSettings.startLvl);
 		pause = new SpriteObject(Consts.gameWidth/2, Consts.gameHeight/2, null, 0); pause.addTexture("graphic/pause.png");
 		pause.priority = 2;
 	}
@@ -139,6 +141,7 @@ public class GameWorld extends World{
 		// restart(LauncherSettings.startLvl);
 		timeNextLvl = 0;
 		isNextLvl  = true;
+		blackScreenAnimation.comic.load(levelId);
 	}
 
 	float breakTime = 0f;
@@ -176,19 +179,20 @@ public class GameWorld extends World{
 			nextLvlRect.visibility+=delta/10;
 			if (nextLvlRect.visibility > 1) nextLvlRect.visibility = 1;
 			timeNextLvl += delta;
-			if (timeNextLvl > 10 && !isBreak) {
+			if (timeNextLvl > 10 && !isBreak && nextLvlRect.visibility >= 1) {
 				gameObjects.clear();
-				gameObjects.add(nextLvlRect); ///  +1
+				//gameObjects.add(nextLvlRect); ///  +1
 				hintTime = 0;
 				restart(levelId);
-				gameObjects.remove(nextLvlRect);
-				gameObjects.add(nextLvlRect);
-				//isNextLvl = false;
+				//gameObjects.remove(nextLvlRect);
+				//gameObjects.add(nextLvlRect);
+//				isNextLvl = false;
 				isBreak = true;
 				breakTime = 0f;
 				blackScreenAnimation.reset();
 				breakContinue = false;
 				breakWindow.storyText.isOn = true;
+
 			}
 			if (isBreak) {
 				breakTime += delta;
@@ -205,11 +209,11 @@ public class GameWorld extends World{
 		}
 
 		if (isConversation) {
-			conversationShade += delta/5;
+			conversationShade += delta/3;
 			if (conversationShade > 1) conversationShade = 1;
 		}
 		else {
-			conversationShade -= delta/5;
+			conversationShade -= delta/3;
 			if (conversationShade < 0.4f) conversationShade = 0.4f;
 		}
 		

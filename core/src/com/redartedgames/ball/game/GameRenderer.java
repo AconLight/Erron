@@ -91,7 +91,7 @@ public class GameRenderer extends ScreenRenderer{
 				world.getGameObjects().get(j).render(batch, i);
 			}
 		}
-		world.breakWindow.storyText.renderText(batch, 100, Consts.gameHeight-100);
+		//world.breakWindow.storyText.renderText(batch, 100, Consts.gameHeight-100);
 		world.blackScreenAnimation.render(batch);
 		batch.end();
 	}
@@ -334,6 +334,7 @@ public class GameRenderer extends ScreenRenderer{
 		batch.draw(GameObject.dotTex, 0, 0, Consts.gameWidth, Consts.gameHeight);
 		//batch.setColor(0.7f, 0.7f, 0.7f, 1);
 		//batch.draw(GameObject.dotTex, 0, 0, Consts.gameWidth, Consts.gameHeight);
+
 		for (int i = 0; i < GameObject.priorities; i++) {
 			for (int j = 0; j < world.getGameObjects().size(); j++) {
 				if (world.getGameObjects().get(j).getPriority() >= i) {
@@ -366,9 +367,11 @@ public class GameRenderer extends ScreenRenderer{
 			impsDx += 68 + 40;
 		}
 		
-		bgshade.render(batch, 0);
-		world.breakWindow.storyText.renderText(batch, 100, Consts.gameHeight-100);
+
+		//world.breakWindow.storyText.renderText(batch, 100, Consts.gameHeight-100);
+		world.nextLvlRect.render(batch, 0);
 		world.blackScreenAnimation.render(batch);
+		bgshade.render(batch, 0);
 		batch.end();
 		
 		

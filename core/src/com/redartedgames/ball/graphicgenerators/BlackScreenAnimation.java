@@ -5,19 +5,22 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.redartedgames.ball.comic.Comic;
 import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.screen.Consts;
 
 public class BlackScreenAnimation {
 	int width = 20;
 	public int direction = 0;
-	float speed = 20;
+	float speed = 10;
 	Random rand;
 	ArrayList<Float> rects, speeds;
 	public boolean hasEnded;
 	public boolean isOn;
+	public Comic comic;
 	
 	public BlackScreenAnimation() {
+		comic = new Comic();
 		rand = new Random();
 		rects = new ArrayList<>();
 		speeds = new ArrayList<>();
@@ -37,15 +40,19 @@ public class BlackScreenAnimation {
 	}
 	
 	public void update(float delta) {
+		comic.update(delta);
 		boolean flag = true;
 		float k = 0f;
 		if (direction > 0) {
 			k = 1f;
 		}
 		for(int i = 0; i < rects.size(); i++) {
-			if (rects.get(i) < Consts.gameHeight*0.8f && direction > 0 || rects.get(i) > Consts.gameHeight*0.2f && direction < 0) {
+			if (rects.get(i) < Consts.gameHeight && direction > 0 || rects.get(i) > 0 && direction < 0) {
 				flag = false;
-				rects.set(i, (float) (rects.get(i) + direction*(speed*(k - direction*Math.sin(Math.PI*(speeds.size()-i)/speeds.size())*Math.sin(Math.PI*(speeds.size()-i)/speeds.size())) + speeds.get(i) + rand.nextInt((int) speed))*delta));
+				float ff = (float) (1f - Math.sin(0.67f*Math.PI*(speeds.size()-i*0.5f)/speeds.size()));
+				ff = ff;
+				rects.set(i, (float) (rects.get(i) + (direction*(rand.nextInt((int) speed*4)))*delta));
+				rects.set(i, (float) (rects.get(i) + speed*3*ff*delta));
 			}
 
 		}
@@ -64,14 +71,18 @@ public class BlackScreenAnimation {
 	}
 	
 	public void render(SpriteBatch batch) {
-		batch.setColor(0.07f, 0.07f, 0.07f, 1);
-		if (isOn)
-		for(int i = 0; i < rects.size(); i++) {
+
+		if (isOn) {
+			comic.render(batch);
+			float f = 0f;//(Consts.gameHeight-rects.get(0)*1f) / Consts.gameHeight;
+			batch.setColor(0.05f*f, 0.03f*f, 0.03f*f, 1);
+			for (int i = 0; i < rects.size(); i++) {
 //			if (direction < 0) {
-				batch.draw(GameObject.dotTex, i*width, 0, width, rects.get(i));
+				batch.draw(GameObject.dotTex, i * width, 0, width, rects.get(i));
 //			}
 //			else
-				batch.draw(GameObject.dotTex, i*width, Consts.gameHeight - rects.get(i), width, rects.get(i));
+				batch.draw(GameObject.dotTex, i * width, Consts.gameHeight - rects.get(i), width, rects.get(i));
+			}
 		}
 		
 	}
