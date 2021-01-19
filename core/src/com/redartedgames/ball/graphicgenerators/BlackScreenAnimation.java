@@ -38,10 +38,14 @@ public class BlackScreenAnimation {
 	
 	public void update(float delta) {
 		boolean flag = true;
+		float k = 0f;
+		if (direction > 0) {
+			k = 1f;
+		}
 		for(int i = 0; i < rects.size(); i++) {
-			if (rects.get(i) < Consts.gameHeight && direction > 0 || rects.get(i) > 0 && direction < 0) {
+			if (rects.get(i) < Consts.gameHeight*0.8f && direction > 0 || rects.get(i) > Consts.gameHeight*0.2f && direction < 0) {
 				flag = false;
-				rects.set(i, (float) (rects.get(i) + direction*(speed + speeds.get(i) + rand.nextInt((int) speed))*delta));
+				rects.set(i, (float) (rects.get(i) + direction*(speed*(k - direction*Math.sin(Math.PI*(speeds.size()-i)/speeds.size())*Math.sin(Math.PI*(speeds.size()-i)/speeds.size())) + speeds.get(i) + rand.nextInt((int) speed))*delta));
 			}
 
 		}
@@ -63,10 +67,10 @@ public class BlackScreenAnimation {
 		batch.setColor(0.07f, 0.07f, 0.07f, 1);
 		if (isOn)
 		for(int i = 0; i < rects.size(); i++) {
-			if (direction < 0) {
+//			if (direction < 0) {
 				batch.draw(GameObject.dotTex, i*width, 0, width, rects.get(i));
-			}
-			else
+//			}
+//			else
 				batch.draw(GameObject.dotTex, i*width, Consts.gameHeight - rects.get(i), width, rects.get(i));
 		}
 		
