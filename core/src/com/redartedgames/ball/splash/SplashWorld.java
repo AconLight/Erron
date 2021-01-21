@@ -1,7 +1,7 @@
 package com.redartedgames.ball.splash;
 
 import com.redartedgames.ball.myobjects.LoadingSprite;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.screen.World;
 
 public class SplashWorld extends World{
@@ -11,6 +11,7 @@ public class SplashWorld extends World{
 	public SplashWorld() {
 		super();
 		sprite = new LoadingSprite(Consts.gameWidth/2, Consts.gameHeight/4, 0, null);
+		gameObjects.add(sprite);
 		gameObjects.add(sprite);
 	}
 	float time = 0;

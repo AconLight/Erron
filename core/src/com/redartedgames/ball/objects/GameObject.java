@@ -102,13 +102,15 @@ public class GameObject implements Editorable{
 			position.x += x;
 			position.y += y;
 			movement.transform(x, y);
-			hitbox.update(new BigDecimal("" + position.x), new BigDecimal("" + position.y));
+			hitbox.update(new BigDecimal("" + position.x), new BigDecimal("" + position.y),
+					new BigDecimal("" + velocity.x), new BigDecimal("" + velocity.y));
 		}
 		
 		
 		public void updateBefore(float delta, float vx, float vy) {
 			movement.updateBefore(delta);
-			hitbox.update(new BigDecimal("" + position.x), new BigDecimal("" + position.y));
+			hitbox.update(new BigDecimal("" + position.x), new BigDecimal("" + position.y),
+					new BigDecimal("" + velocity.x), new BigDecimal("" + velocity.y));
 			movement.setColToZero();
 		}
 		

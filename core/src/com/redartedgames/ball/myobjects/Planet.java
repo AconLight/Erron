@@ -4,13 +4,11 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.redartedgames.ball.colors.ColorGenerator;
 import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.objects.SpriteObject;
-import com.redartedgames.ball.objects.Hitbox.BehaviorMode;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 
 public class Planet extends GameObject{
 	public SpriteObject planet1;
@@ -45,6 +43,13 @@ public class Planet extends GameObject{
 		planet1.R = v.x; planet1.G = v.y; planet1.B = v.z;
 		for (int i = 0; i < rectNum; i++) {
 			rects[i].R = v.x; rects[i].G = v.y; rects[i].B = v.z;
+		}
+	}
+
+	public void updateColor(Color v) {
+		planet1.R = v.r; planet1.G = v.g; planet1.B = v.b;
+		for (int i = 0; i < rectNum; i++) {
+			rects[i].R = v.r; rects[i].G = v.g; rects[i].B = v.b;
 		}
 	}
 	

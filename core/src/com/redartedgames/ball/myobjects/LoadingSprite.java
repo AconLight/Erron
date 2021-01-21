@@ -3,12 +3,9 @@ package com.redartedgames.ball.myobjects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.redartedgames.ball.objects.GameObject;
-import com.redartedgames.ball.objects.ReversableMovement;
 import com.redartedgames.ball.objects.ReversableObject;
 import com.redartedgames.ball.objects.SpriteObject;
-import com.redartedgames.ball.screen.Consts;
-
-import java.math.BigDecimal;
+import com.redartedgames.ball.consts.Consts;
 
 public class LoadingSprite extends ReversableObject{
 

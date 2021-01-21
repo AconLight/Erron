@@ -3,11 +3,10 @@ package com.redartedgames.ball.graphicgenerators;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.redartedgames.ball.comic.Comic;
 import com.redartedgames.ball.objects.GameObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 
 public class BlackScreenAnimation {
 	int width = 20;

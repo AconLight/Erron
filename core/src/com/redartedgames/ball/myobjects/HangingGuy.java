@@ -12,7 +12,7 @@ import com.redartedgames.ball.objects.SpriteObject;
 
 public class HangingGuy extends ReversableObject{
 
-	SpriteObject sprite;
+	SpriteObject sprite, tree;
 	Player player;
 	float k = 100;
 	float dx = 0, dy = 110;
@@ -23,8 +23,12 @@ public class HangingGuy extends ReversableObject{
 		super(x, y, parent, id);
 		isAttached = true;
 		sprite = new SpriteObject(x, y, this, 0);
+		tree = new SpriteObject(x + 330, y+200, this, 0);
 		sprite.addTexture("graphic/hungingguy.png");
+		tree.addTexture("graphic/treeforhang.png");
 		gameObjects.add(sprite);
+		tree.sclX = 4f;
+		tree.sclY = 4f;
 		sprite.sclX = 1.4f;
 		sprite.sclY = 1.4f;
 	}
@@ -57,7 +61,8 @@ public class HangingGuy extends ReversableObject{
 	
 	public void render(SpriteBatch batch, int priority) {
 		batch.setColor(20/256f, 20/256f, 20/256f, 1);
-		batch.draw(GameObject.dotTex, position.x + dx, position.y + dy - 80, 4, 1000);
+		batch.draw(GameObject.dotTex, position.x + dx, position.y + dy - 80, 4, 370);
+		tree.render(batch, priority);
 		sprite.render(batch, priority);
 	}
 	

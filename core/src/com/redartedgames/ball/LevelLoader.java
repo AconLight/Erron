@@ -2,13 +2,7 @@ package com.redartedgames.ball;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.redartedgames.ball.database.EasterEggsBase;
-import com.redartedgames.ball.database.StoryBase;
-import com.redartedgames.ball.dialog.ConversationIntro;
-import com.redartedgames.ball.dialog.DialogBackground;
 import com.redartedgames.ball.dialog.DialogHero;
 import com.redartedgames.ball.dialog.Hint;
 import com.redartedgames.ball.game.GameWorld;
@@ -23,7 +17,7 @@ import com.redartedgames.ball.myobjects.StaticButton;
 import com.redartedgames.ball.myobjects.TimeBackItem;
 import com.redartedgames.ball.objects.Hitbox.BehaviorMode;
 import com.redartedgames.ball.objects.ReversableObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 
 public class LevelLoader {
 
@@ -35,33 +29,35 @@ public class LevelLoader {
 //				for (int j = 0; j < 4; j++) {
 //					objects.add(new Ball(1200+ i*45, 800-j*50, 30, 1, BehaviorMode.dynamic, null, 0));
 //				}
-				
-			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(975, 30, 2060, 160, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(350, 130, 770, 80, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(175, 180, 580, 140, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(-75, 280, 580, 240, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1675, 755, 60, 560, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1100, 755, 60, 560, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(2002, 333, 310, 200, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1125, 460, 80, 50, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1650, 460, 80, 50, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1625, 410, 90, 80, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1154, 410, 90, 80, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1204, 335, 120, 80, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1576, 335, 120, 80, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1801, 106, 310, 130, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1901, 182, 310, 200, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1575, 380, 50, 50, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1657, 480, 50, 50, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1200, 380, 50, 50, BehaviorMode.kinematic, null, 0));
-			objects.add(new Rect(1121, 480, 50, 50, BehaviorMode.kinematic, null, 0));
+
+
+			//objects.add(new Rect(1920, 650, 200, 1300, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(975, 30, 2060, 160, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(350, 130, 770, 80, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(175, 180, 580, 140, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(-75, 280, 580, 240, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1675, 755, 60, 560, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1100, 755, 60, 560, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(2002, 333, 310, 200, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1125, 460, 80, 50, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1650, 460, 80, 50, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1625, 410, 90, 80, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1154, 410, 90, 80, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1204, 335, 120, 80, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1576, 335, 120, 80, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1801, 106, 310, 130, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1901, 182, 310, 200, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1575, 380, 50, 50, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1657, 480, 50, 50, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1200, 380, 50, 50, BehaviorMode.kinematic, null, 0));
+//			objects.add(new Rect(1121, 480, 50, 50, BehaviorMode.kinematic, null, 0));
 			
 			break;
 		}
 		case 1: {
 			objects.add(new Rect(1920/2, 100, 1920, 200, BehaviorMode.kinematic, null, 0));
-			HangingGuy h = new HangingGuy(100, 400, 0, null);
+			HangingGuy h = new HangingGuy(170, 400, 0, null);
 			TimeBackItem e = new TimeBackItem(700, 300, null, 0);
 			e.setItem("graphic/sznur.png", 700, 300, 2);
 			player.easterEggs.add(e);

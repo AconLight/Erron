@@ -2,13 +2,9 @@ package com.redartedgames.ball.myobjects;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.objects.Movement;
 import com.redartedgames.ball.objects.ReversableObject;
-import com.redartedgames.ball.screen.Consts;
 
 public class ImpsCollection extends ReversableObject{
 	private ArrayList<Imp> imps;

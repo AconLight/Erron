@@ -2,11 +2,10 @@ package com.redartedgames.ball.map;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
 import com.redartedgames.ball.consts.LauncherSettings;
 import com.redartedgames.ball.myobjects.LvlIcon;
 import com.redartedgames.ball.objects.SpriteObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.screen.World;
 
 public class MapWorld extends World{

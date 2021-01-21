@@ -2,6 +2,7 @@ package com.redartedgames.ball.objects;
 
 import java.math.BigDecimal;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.redartedgames.ball.objects.Hitbox.BehaviorMode;
@@ -35,7 +36,8 @@ public class ReversableObject extends ColSpriteObject{
 			//}
 
 			movement.updateBefore(delta);
-			hitbox.update(((ReversableMovement) movement).getPositionX(), ((ReversableMovement) movement).getPositionY());
+			hitbox.update(((ReversableMovement) movement).getPositionX(), ((ReversableMovement) movement).getPositionY(),
+					((ReversableMovement) movement).getVelocityX(), ((ReversableMovement) movement).getVelocityX());
 			movement.setColToZero();
 			if (!((ReversableMovement) movement).getIsForward()) {
 				isForwardFac -= 20*delta;
@@ -70,6 +72,8 @@ public class ReversableObject extends ColSpriteObject{
 		@Override
 		public void collide(GameObject obj) {
 			super.collide(obj);
+//			if (c.isTrue)
+//				Gdx.app.log("rect", ((Hitbox) getHitbox()).velocityX.floatValue() + "");
 			if (getHitbox().bMode == BehaviorMode.dynamic && obj.hitbox != null && obj.hitbox.bMode != BehaviorMode.none) {
 				if (!((ReversableObject)obj).isFrozening) {
 					((ReversableMovement) movement).addCollisionAcc(c.disX.pow(5), c.disY.pow(5));

@@ -12,20 +12,17 @@ import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.redartedgames.ball.colors.ColorGenerator;
 import com.redartedgames.ball.consts.LauncherSettings;
-import com.redartedgames.ball.graphicgenerators.TreeGenerator;
 import com.redartedgames.ball.myobjects.Cloud;
-import com.redartedgames.ball.myobjects.Freeze;
 import com.redartedgames.ball.myobjects.Imp;
 import com.redartedgames.ball.myobjects.Planet;
 import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.objects.SpriteObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.screen.ScreenRenderer;
 import com.redartedgames.ball.screen.World;
 
@@ -198,6 +195,9 @@ public class GameRenderer extends ScreenRenderer{
 		if (world.levelId > currentLevelId && !world.isNextLvl) {
 			loadNextLvl();
 		}
+		cloud1.setIsForward(world.isForward);
+		cloud2.setIsForward(world.isForward);
+		cloud3.setIsForward(world.isForward);
 		cloud1.getPosition().x = (float) (-world.player.getPosition().x/60 + Consts.gameWidth/2 + 10*Math.sin(world.cloudT/100));
 		cloud2.getPosition().x = (float) (-world.player.getPosition().x/40 + Consts.gameWidth/2 + 20*Math.sin(world.cloudT/100 + 2));
 		cloud3.getPosition().x = (float) (-world.player.getPosition().x/20 + Consts.gameWidth/2 + 30*Math.sin(world.cloudT/100 + 1));
@@ -331,7 +331,7 @@ public class GameRenderer extends ScreenRenderer{
 		batch.setColor(1-((GameWorld) world).player.playerSprite.R, 
 				1-((GameWorld) world).player.playerSprite.G, 
 				1-((GameWorld) world).player.playerSprite.B, (1-((GameWorld) world).player.isForwardFac)*0.4f);
-		batch.draw(GameObject.dotTex, 0, 0, Consts.gameWidth, Consts.gameHeight);
+		//batch.draw(GameObject.dotTex, 0, 0, Consts.gameWidth, Consts.gameHeight);
 		//batch.setColor(0.7f, 0.7f, 0.7f, 1);
 		//batch.draw(GameObject.dotTex, 0, 0, Consts.gameWidth, Consts.gameHeight);
 

@@ -1,9 +1,7 @@
 package com.redartedgames.ball.dialog;
 
-import java.util.ArrayList;
-
 import com.redartedgames.ball.objects.GameObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 
 public class BreakWindow extends ConversationIntro {
 

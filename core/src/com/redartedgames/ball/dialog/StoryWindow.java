@@ -3,7 +3,6 @@ package com.redartedgames.ball.dialog;
 import java.util.ArrayList;
 
 import com.redartedgames.ball.objects.GameObject;
-import com.redartedgames.ball.screen.Consts;
 
 public class StoryWindow extends ConversationIntro {
 

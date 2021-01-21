@@ -8,15 +8,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Vector2;
-import com.redartedgames.ball.game.GameWorld;
 import com.redartedgames.ball.graphicgenerators.Biom;
 import com.redartedgames.ball.graphicgenerators.Mountain;
-import com.redartedgames.ball.graphicgenerators.TreeGenerator;
-import com.redartedgames.ball.myobjects.Planet;
 import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.objects.SpriteObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.screen.ScreenRenderer;
 import com.redartedgames.ball.screen.World;
 

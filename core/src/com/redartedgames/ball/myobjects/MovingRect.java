@@ -109,6 +109,12 @@ public class MovingRect extends Rect{
 			centerPositionY = new BigDecimal("" + position.y);
 		}
 	}
+
+	@Override
+	public void collide(GameObject obj) {
+		//Gdx.app.log("elo", "asd");
+		super.collide(obj);
+	}
 	
 	@Override
 	public GameObject createCopy() {

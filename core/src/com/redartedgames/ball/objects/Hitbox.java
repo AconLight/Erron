@@ -25,13 +25,27 @@ public class Hitbox {
 	private float colRadius;
 	private Vector2 position, oldPosition;
 	private BigDecimal positionX, positionY, circleR;
-	
+	public BigDecimal velocityX = new BigDecimal(0), velocityY = new BigDecimal(0);
+	public float frictionX = 1f;
+
 	private static final float k = PhysicConsts.HITBOX_K;
 	
 	public Hitbox() {
 		sMode = ShapeMode.none;
 		bMode = BehaviorMode.kinematic;
 	}
+	public Hitbox(BigDecimal positionX, BigDecimal positionY, BigDecimal velocityX, BigDecimal velocityY, float radius, BehaviorMode mode){
+		sMode = ShapeMode.Circle;
+		bMode = mode;
+		circle = new Circle(positionX.floatValue(), positionY.floatValue(), radius);
+		colRadius = radius;
+		circleR = new BigDecimal(""+radius);
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.velocityX = velocityX;
+		this.velocityY = velocityY;
+	}
+
 	public Hitbox(BigDecimal positionX, BigDecimal positionY, float radius, BehaviorMode mode){
 		sMode = ShapeMode.Circle;
 		bMode = mode;
@@ -49,6 +63,17 @@ public class Hitbox {
 		colRadius = (float) (Math.sqrt(width*width + height*height)/2);
 		this.positionX = positionX;
 		this.positionY = positionY;
+	}
+
+	public Hitbox(BigDecimal positionX, BigDecimal positionY, BigDecimal velocityX, BigDecimal velocityY, float width, float height, BehaviorMode mode){
+		sMode = ShapeMode.Rectangle;
+		bMode = mode;
+		rectangle = new Rectangle(positionX.floatValue() - width/2, positionY.floatValue() - height/2, width, height);
+		colRadius = (float) (Math.sqrt(width*width + height*height)/2);
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.velocityX = velocityX;
+		this.velocityY = velocityY;
 	}
 	
 	public Hitbox(BigDecimal positionX, BigDecimal positionY, float[] verticles, BehaviorMode mode, float colRadius){
@@ -83,8 +108,33 @@ public class Hitbox {
 			}
 		}
 	}
+
+	public void update(BigDecimal x, BigDecimal y, BigDecimal velocityX, BigDecimal velocityY) {
+		this.velocityX = velocityX;
+		this.velocityY = velocityY;
+		switch (sMode) {
+			case none: {
+				break;
+			}
+			case Rectangle: {
+				rectangle.set(x.floatValue() - rectangle.width/2, y.floatValue() - rectangle.height/2, rectangle.width, rectangle.height);
+				break;
+			}
+			case Circle: {
+				positionX = x;
+				positionY = y;
+				circle.set(x.floatValue(), y.floatValue(), circle.radius);
+				break;
+			}
+			case Polygon: {
+				polygon.translate(position.x - oldPosition.x, position.y - oldPosition.y);
+				oldPosition.set(position);
+				break;
+			}
+		}
+	}
 	
-	private CollisionHandle circleRect(Circle circle, Rectangle rectangle) {
+	private CollisionHandle circleRect(Hitbox hitbox1, Hitbox hitbox2, Circle circle, Rectangle rectangle) {
 		CollisionHandle c = new CollisionHandle();
 		c.disX = BigDecimal.ZERO;
 		c.disY = BigDecimal.ZERO;
@@ -92,7 +142,9 @@ public class Hitbox {
 		double v;
 		double dr2, dr, dx, dy;
 		boolean flaga = true;
-		
+		if (circle == null || rectangle == null) {
+			return c;
+		}
 		if ((circle.x > rectangle.x && circle.x < rectangle.x+rectangle.width) || (circle.y > rectangle.y && circle.y < rectangle.y+rectangle.height)) {
 			if (circle.x + circle.radius > rectangle.x && circle.x < rectangle.x) {
 				dx = circle.x + circle.radius - rectangle.x;
@@ -111,55 +163,68 @@ public class Hitbox {
 				c.disY = new BigDecimal("" + (int)(-dy*k));
 			}
 		}
-			else {
-				
-				
-				dx = circle.x - rectangle.x;
-				dy = circle.y - rectangle.y;
-				dr2 = dx*dx + dy*dy;
-				dr = Math.sqrt(dr2);
-				if (dr2 < circle.radius*circle.radius) {
-					c.disX = c.disX.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dx/dr)));
-					c.disY = c.disY.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dy/dr)));
-					flaga = false;
-				}
-				
-				dx = circle.x - (rectangle.x + rectangle.width);
-				dy = circle.y - rectangle.y;
-				dr2 = dx*dx + dy*dy;
-				dr = Math.sqrt(dr2);
-				if (dr2 < circle.radius*circle.radius) {
-					c.disX = c.disX.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dx/dr)));
-					c.disY = c.disY.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dy/dr)));
-					flaga = false;
-				}
-				
-				dx = circle.x - (rectangle.x + rectangle.width);
-				dy = circle.y - (rectangle.y + rectangle.height);
-				dr2 = dx*dx + dy*dy;
-				dr = Math.sqrt(dr2);
-				//Gdx.app.log("Hitbox", "" + dx + ", " + dy);
-				//Gdx.app.log("Hitbox, circle", "" + circle.x + ", " + circle.y);
-				//Gdx.app.log("Hitbox, rect", "" + (rectangle.x+rectangle.width) + ", " + (rectangle.y+rectangle.height));
-				if (dr2 < circle.radius*circle.radius) {
-					//Gdx.app.log("Hitbox", "" + dx + ", " + dy);
-					c.disX = c.disX.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dx/dr)));
-					c.disY = c.disY.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dy/dr)));
-					flaga = false;
-				}
-				
-				dx = circle.x - rectangle.x;
-				dy = circle.y - (rectangle.y + rectangle.height);
-				dr2 = dx*dx + dy*dy;
-				dr = Math.sqrt(dr2);
-				
-				if (dr2 < circle.radius*circle.radius) {
-					c.disX = c.disX.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dx/dr)));
-					c.disY = c.disY.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dy/dr)));
-					flaga = false;
-				}
-				
+		else {
+
+
+			dx = circle.x - rectangle.x;
+			dy = circle.y - rectangle.y;
+			dr2 = dx*dx + dy*dy;
+			dr = Math.sqrt(dr2);
+			if (dr2 < circle.radius*circle.radius) {
+				c.disX = c.disX.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dx/dr)));
+				c.disY = c.disY.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dy/dr)));
+				flaga = false;
 			}
+
+			dx = circle.x - (rectangle.x + rectangle.width);
+			dy = circle.y - rectangle.y;
+			dr2 = dx*dx + dy*dy;
+			dr = Math.sqrt(dr2);
+			if (dr2 < circle.radius*circle.radius) {
+				c.disX = c.disX.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dx/dr)));
+				c.disY = c.disY.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dy/dr)));
+				flaga = false;
+			}
+
+			dx = circle.x - (rectangle.x + rectangle.width);
+			dy = circle.y - (rectangle.y + rectangle.height);
+			dr2 = dx*dx + dy*dy;
+			dr = Math.sqrt(dr2);
+			//Gdx.app.log("Hitbox", "" + dx + ", " + dy);
+			//Gdx.app.log("Hitbox, circle", "" + circle.x + ", " + circle.y);
+			//Gdx.app.log("Hitbox, rect", "" + (rectangle.x+rectangle.width) + ", " + (rectangle.y+rectangle.height));
+			if (dr2 < circle.radius*circle.radius) {
+				//Gdx.app.log("Hitbox", "" + dx + ", " + dy);
+				c.disX = c.disX.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dx/dr)));
+				c.disY = c.disY.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dy/dr)));
+				flaga = false;
+			}
+
+			dx = circle.x - rectangle.x;
+			dy = circle.y - (rectangle.y + rectangle.height);
+			dr2 = dx*dx + dy*dy;
+			dr = Math.sqrt(dr2);
+
+			if (dr2 < circle.radius*circle.radius) {
+				c.disX = c.disX.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dx/dr)));
+				c.disY = c.disY.add(new BigDecimal("" + (int)(-k*(dr-circle.radius)*dy/dr)));
+				flaga = false;
+			}
+
+
+
+
+		}
+
+//		Gdx.app.log("disY", "" + c.disY.floatValue());
+//		Gdx.app.log("asd", "" + hitbox1.velocityX.floatValue());
+		if (c.disY.floatValue() > 0) {// && Math.abs(hitbox2.velocityX.floatValue()) > Math.abs(hitbox1.velocityX.floatValue())) {
+//			Gdx.app.log("asd2", "" + hitbox2.velocityX.floatValue());
+//			Gdx.app.log("asd", "" + hitbox1.velocityX.floatValue());
+			//c.disX = c.disX.add(new BigDecimal(1));
+//			c.disX = c.disX.add(new BigDecimal(Math.signum(hitbox2.velocityX.floatValue())*Math.sqrt(Math.abs(hitbox2.velocityX.floatValue()))).multiply(new BigDecimal(hitbox2.frictionX/2f)));
+			//c.disX = c.disX.add(new BigDecimal(100));
+		}
 		
 		
 		return c;
@@ -277,7 +342,7 @@ public class Hitbox {
 					}
 					case Circle: {
 						if (Intersector.overlaps(hitbox.circle, rectangle)) {
-							c = circleRect(hitbox.circle, rectangle);
+							c = circleRect(hitbox, this, hitbox.circle, rectangle);
 							c.disX = new BigDecimal("" + (-c.disX.floatValue()));
 							c.disY = new BigDecimal("" + (-c.disY.floatValue()));
 							c.isTrue = true;
@@ -300,7 +365,7 @@ public class Hitbox {
 				switch (hitbox.sMode) {
 					case Rectangle: {
 						if (Intersector.overlaps(circle, hitbox.rectangle)) {
-							c = circleRect(circle, hitbox.rectangle);
+							c = circleRect(this, hitbox, circle, hitbox.rectangle);
 							c.disX = new BigDecimal("" + (c.disX.floatValue()));
 							c.disY = new BigDecimal("" + (c.disY.floatValue()));
 							c.isTrue = true;

@@ -26,7 +26,8 @@ public class Ball extends ReversableObject{
 		priority = 2;
 		this.radius = radius;
 		this.m = m;
-		setHitbox(new Hitbox(((ReversableMovement) movement).getPositionX(), ((ReversableMovement) movement).getPositionY(), radius-2, bMode));
+		setHitbox(new Hitbox(((ReversableMovement) movement).getPositionX(), ((ReversableMovement) movement).getPositionY(),
+				((ReversableMovement) movement).getVelocityX(), ((ReversableMovement) movement).getVelocityY(), radius-2, bMode));
 		if (bMode == BehaviorMode.dynamic) {
 			gY = new BigDecimal("-200");
 			((ReversableMovement) movement).setGY(new BigDecimal("" + PhysicConsts.G));

@@ -1,13 +1,10 @@
 package com.redartedgames.ball.dialog;
 
-import java.math.BigDecimal;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.redartedgames.ball.database.EasterEggsBase;
 import com.redartedgames.ball.myobjects.EasterEgg;
 import com.redartedgames.ball.objects.GameObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 
 public class DialogConversationWindow extends GameObject{
 

@@ -14,7 +14,7 @@ import com.redartedgames.ball.myobjects.*;
 import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.objects.ReversableObject;
 import com.redartedgames.ball.objects.SpriteObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.screen.World;
 import com.redartedgames.ball.sound.SoundHandler;
 
@@ -208,13 +208,13 @@ public class GameWorld extends World{
 			}
 		}
 
-		if (isConversation) {
-			conversationShade += delta/3;
+		if (!isForward) {
+			conversationShade += delta/30;
 			if (conversationShade > 1) conversationShade = 1;
 		}
 		else {
-			conversationShade -= delta/3;
-			if (conversationShade < 0.4f) conversationShade = 0.4f;
+			conversationShade -= delta/30;
+			if (conversationShade < 0.2f) conversationShade = 0.2f;
 		}
 		
 		cloudT += delta;

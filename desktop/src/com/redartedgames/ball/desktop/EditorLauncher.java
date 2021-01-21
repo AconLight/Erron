@@ -3,7 +3,7 @@ package com.redartedgames.ball.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.redartedgames.ball.EditorGame;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 
 public class EditorLauncher {
 	public static void main (String[] arg) {

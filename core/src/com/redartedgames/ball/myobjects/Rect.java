@@ -35,7 +35,9 @@ public class Rect extends ReversableObject{
 		this.width = width;
 		this.height = height;
 		freeze = new Freeze(0 , 0, 0, this, (int)width, (int)height);
-		setHitbox(new Hitbox(positionX, positionY, width, height, bMode));
+		Hitbox hitbox = new Hitbox(positionX, positionY, ((ReversableMovement) movement).getVelocityX(), ((ReversableMovement) movement).getVelocityY(), width, height, bMode);
+		hitbox.frictionX = 1f;
+		setHitbox(hitbox);
 		if (bMode == BehaviorMode.dynamic) {
 			gY = new BigDecimal("-200");
 			((ReversableMovement) movement).setGY(new BigDecimal("" + PhysicConsts.G));

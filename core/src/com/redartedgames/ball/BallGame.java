@@ -2,16 +2,12 @@ package com.redartedgames.ball;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.redartedgames.ball.colors.ColorGenerator;
 import com.redartedgames.ball.consts.LauncherSettings;
-import com.redartedgames.ball.database.ConversationsBase;
 import com.redartedgames.ball.database.EasterEggsBase;
 import com.redartedgames.ball.game.GameScreen;
 import com.redartedgames.ball.game.GameWorld;
@@ -22,18 +18,12 @@ import com.redartedgames.ball.map.MapWorld;
 import com.redartedgames.ball.menu.MenuInputHandler;
 import com.redartedgames.ball.menu.MenuScreen;
 import com.redartedgames.ball.menu.MenuWorld;
-import com.redartedgames.ball.objects.SpriteObject;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.sound.SoundHandler;
 import com.redartedgames.ball.splash.SplashScreen;
 import com.redartedgames.ball.splash.SplashWorld;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class BallGame extends Game{
@@ -93,7 +83,6 @@ public class BallGame extends Game{
 		cg = new ColorGenerator(4.5f);
 		bg = new Color(cg.generateNextColor(0.3f, 0.7f, 0));
 		time = 0;
-		setMenuMy();
 		Preferences prefs = Gdx.app.getPreferences("maxLavel");
 		if (prefs.contains("value")) {
 			LauncherSettings.maxLevel = prefs.getInteger("value");
@@ -127,6 +116,7 @@ public class BallGame extends Game{
 	float frameTime = 1f/frames;
 
 	float splashTime = 0;
+	boolean hasLoaded = false;
 	@Override
 	public void render () {
 		switch(screenId) {
@@ -137,9 +127,14 @@ public class BallGame extends Game{
 				for(int i = 0; i < 5; i++)
 					splashScreen.update(0.01f);
 				splashScreen.render();
-				if (splashTime > 5) {
+				if (splashTime > 3 && !hasLoaded) {
 					load();
+					hasLoaded = true;
+				}
+
+				if (splashTime > 4) {
 					screenId = 1;
+					setMenuMy();
 				}
 				break;
 			}

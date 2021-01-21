@@ -10,11 +10,17 @@ import com.redartedgames.ball.objects.GameObject;
 public class Cloud extends GameObject{
 	Random rand = new Random();
 	Color color = new Color(1, 1, 1, 0.01f);
+	Color colorBackward = new Color(1, 1, 1, 0.03f);
 	int k = 8;
 	int kk = 2;
 	float a1 = 1, a2 = 1;
 	float div = 3;
-	CloudRect cloudRect;
+	public CloudRect cloudRect;
+
+	boolean isForward = true;
+	public void setIsForward(boolean isForward) {
+		this.isForward = isForward;
+	}
 	
 	public class CloudRect {
 		CloudRect c1, c2, c3, c4;
@@ -40,9 +46,27 @@ public class Cloud extends GameObject{
 				c4 = new CloudRect(x, (int) (y - heightd2 - heightd2/div), (int) (widthd2/div), (int) (heightd2/div), depth-1, 4);
 			}
 		}
-		
+
+		float colTime = 0f;
 		public void render(SpriteBatch sr, float posx, float posy) {
-			sr.setColor(color);
+			if (isForward) {
+				colTime += 0.04f;
+				if (colTime >= 1) {
+					colTime = 1;
+				}
+
+			} else {
+				colTime -= 0.01f;
+				if (colTime <= 0) {
+					colTime = 0;
+				}
+			}
+			float a = color.a * colTime + (1-colTime)*colorBackward.a;
+			if (rand.nextInt(50) == 0) {
+				a = color.a;
+			}
+			sr.setColor(1, 1, 1, a);
+
 			sr.draw(GameObject.dotTex, posx + x-widthd2, posy + y - heightd2, 2*widthd2, 2*heightd2);
 			if (c1 != null) c1.render(sr, posx, posy);
 			if (c2 != null) c2.render(sr, posx, posy);

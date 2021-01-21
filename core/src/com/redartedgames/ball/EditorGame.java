@@ -8,26 +8,20 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.redartedgames.ball.editor.EditorNode;
-import com.redartedgames.ball.editor.EditorOption;
 import com.redartedgames.ball.editor.EditorPicker;
-import com.redartedgames.ball.editor.Editorable;
 import com.redartedgames.ball.editor.LevelToSave;
 import com.redartedgames.ball.editor.ObjectPick;
 import com.redartedgames.ball.game.GameScreen;
 import com.redartedgames.ball.game.GameWorld;
-import com.redartedgames.ball.game.InputHandler;
 import com.redartedgames.ball.myobjects.Ball;
-import com.redartedgames.ball.myobjects.ButtonRect;
 import com.redartedgames.ball.myobjects.LavaRect;
 import com.redartedgames.ball.myobjects.MovingRect;
 import com.redartedgames.ball.myobjects.Rect;
 import com.redartedgames.ball.myobjects.StaticButton;
 import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.objects.Hitbox.BehaviorMode;
-import com.redartedgames.ball.screen.Consts;
+import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.sound.SoundHandler;
 
 public class EditorGame extends Game {

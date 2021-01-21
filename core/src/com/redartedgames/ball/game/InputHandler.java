@@ -1,19 +1,9 @@
 package com.redartedgames.ball.game;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.math.Vector2;
 import com.redartedgames.ball.consts.LauncherSettings;
 import com.redartedgames.ball.consts.PlayerConsts;
-import com.redartedgames.ball.objects.GameObject;
-import com.redartedgames.ball.objects.Hitbox.BehaviorMode;
-import com.redartedgames.ball.objects.Movement;
-import com.redartedgames.ball.objects.ReversableMovement;
-import com.redartedgames.ball.objects.ReversableObject;
-import com.redartedgames.ball.screen.Consts;
-import com.redartedgames.ball.screen.World;
 
 public class InputHandler implements InputProcessor{
 

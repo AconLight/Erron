@@ -4,24 +4,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.redartedgames.ball.consts.LauncherSettings;
 import com.redartedgames.ball.consts.PlayerConsts;
 import com.redartedgames.ball.database.EasterEggsBase;
-import com.redartedgames.ball.dialog.Conversation;
-import com.redartedgames.ball.dialog.DialogConversationWindow;
-import com.redartedgames.ball.dialog.DialogWindow;
 import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.objects.Hitbox.BehaviorMode;
 import com.redartedgames.ball.objects.ReversableMovement;
-import com.redartedgames.ball.objects.ReversableObject;
 import com.redartedgames.ball.objects.SpriteObject;
-import com.redartedgames.ball.screen.Consts;
 import com.redartedgames.ball.sound.SoundHandler;
 
 public class Player extends Ball{
