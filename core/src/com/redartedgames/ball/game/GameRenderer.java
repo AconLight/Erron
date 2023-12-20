@@ -84,8 +84,10 @@ public class GameRenderer extends ScreenRenderer{
 		batch.begin();
 		for (int i = 0; i < GameObject.priorities; i++) {
 			for (int j = 0; j < world.getGameObjects().size(); j++) {
-				//world.getGameObjects().get(j).render(batch, i);
-				world.getGameObjects().get(j).render(batch, i);
+				if (world.getGameObjects().get(j).getPriority() >= i) {
+					//world.getGameObjects().get(j).render(batch, i);
+					world.getGameObjects().get(j).render(batch, i);
+				}
 			}
 		}
 		//world.breakWindow.storyText.renderText(batch, 100, Consts.gameHeight-100);

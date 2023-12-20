@@ -26,11 +26,13 @@ public class Rect extends ReversableObject{
 	private ArrayList<BlossomRect> blossom;
 	Random r = new Random(2137);
 	Freeze freeze;
+	Plant plant;
 	
 	public Bush bush;
 	
 	public Rect(float x, float y, float width, float height, BehaviorMode bMode, GameObject parent, int id) {
 		super(x, y, parent, id);
+		plant = new Plant(x -width/2*0.7f + r.nextFloat()*width*0.7f, y+height/2, 0, this, width);
 		priority = 2;
 		this.width = width;
 		this.height = height;
@@ -50,6 +52,8 @@ public class Rect extends ReversableObject{
 			if (r.nextInt(2) == 0)
 			bush = new Bush(x - width/2 + r.nextInt((int) width), y + height/2, 0, null, 50, r);
 		}
+
+		gameObjects.add(plant);
 	}
 	
 	@Override
@@ -158,6 +162,7 @@ public class Rect extends ReversableObject{
 	
 	public void updateLast(float delta, float vx, float vy) {
 		super.updateLast(delta, vx, vy);
+		plant.updateLast(delta, vx, vy);
 		for(BlossomRect rect: blossom) {
 			rect.updateLast(delta, vx, vy);
 		}
@@ -167,26 +172,30 @@ public class Rect extends ReversableObject{
 	
 	public void render(SpriteBatch sr, int priority) {
 		if (priority == 0) {
-		sr.setColor(
-				isForwardFac*forwardColor.r + (1-isForwardFac)*backwardColor.r, 
-				isForwardFac*forwardColor.g + (1-isForwardFac)*backwardColor.g, 
-				isForwardFac*forwardColor.b + (1-isForwardFac)*backwardColor.b, 
-				isForwardFac*forwardColor.a + (1-isForwardFac)*backwardColor.a);
-		//sr.rect((position.x - width/2+0.5f), position.y - height/2+0.5f, width+0.5f, height+0.5f);
-		sr.draw(dotTex,(position.x - width/2+0.5f), position.y - height/2+0.5f, width+0.5f, height+0.5f);
-		for(BlossomRect rect: blossom) {
-			rect.render(sr, priority);
-		}
-		if (bush != null) {
-			bush.render(sr, priority);
-		}
+			plant.sprite.setColor(isForwardFac*forwardColor.r + (1-isForwardFac)*backwardColor.r,
+					isForwardFac*forwardColor.g + (1-isForwardFac)*backwardColor.g,
+					isForwardFac*forwardColor.b + (1-isForwardFac)*backwardColor.b,
+					isForwardFac*forwardColor.a + (1-isForwardFac)*backwardColor.a);
+			if (! (this instanceof MovingRect)) {
+				plant.render(sr, priority);
+			}
+			sr.setColor(
+					isForwardFac*forwardColor.r + (1-isForwardFac)*backwardColor.r,
+					isForwardFac*forwardColor.g + (1-isForwardFac)*backwardColor.g,
+					isForwardFac*forwardColor.b + (1-isForwardFac)*backwardColor.b,
+					isForwardFac*forwardColor.a + (1-isForwardFac)*backwardColor.a);
+			sr.draw(dotTex,(position.x - width/2+0.5f), position.y - height/2+0.5f, width+0.5f, height+0.5f);
+			for(BlossomRect rect: blossom) {
+				rect.render(sr, priority);
+			}
+			if (bush != null) {
+				bush.render(sr, priority);
+			}
 		}
 		else {
 			freeze.render(sr, priority);
 		}
 
-		
-		
 	}
 	
 	@Override

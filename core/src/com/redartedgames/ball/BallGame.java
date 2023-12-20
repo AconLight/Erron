@@ -22,6 +22,7 @@ import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.sound.SoundHandler;
 import com.redartedgames.ball.splash.SplashScreen;
 import com.redartedgames.ball.splash.SplashWorld;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 import java.io.*;
 
@@ -49,6 +50,7 @@ public class BallGame extends Game{
 
 	@Override
 	public void create () {
+		ShaderProgram.pedantic = false;
 		screenId = 0;
 		splashScreen = new SplashScreen(Consts.gameWidth, Consts.gameHeight);
 		splashWorld = (SplashWorld)splashScreen.getWorld();

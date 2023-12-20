@@ -14,15 +14,17 @@ public class ReversableMovement extends Movement
 	
 	private ArrayList<ReversableMovement> prevMoves;
 
-	private BigDecimal delta2, positionX, velocityX, accelerationX, collisionAccX, positionY, dragKX, dragKX2, dragKY, dragKY2, delta21,
+	private BigDecimal delta2, positionX, velocityX, accelerationX, collisionAccX, positionY, delta21,
 	velocityY, accelerationY, collisionAccY, gX, gY;
+
+	public BigDecimal dragKX, dragKX2, dragKY, dragKY2;
 	
 	public boolean isForward;
 
 	private boolean isForwardTransaction;
 	public int ctr;
 	public int replacementI = 20;
-	private static float dokladnosc = 0.01f;
+	private static float dokladnosc = 0.1f;
 	private static float v = 1000, j = 4; // do funkcji sigmoid
 	
 	public ReversableMovement(Vector2 position) {

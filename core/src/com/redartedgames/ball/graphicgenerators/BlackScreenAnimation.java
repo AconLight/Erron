@@ -9,9 +9,11 @@ import com.redartedgames.ball.objects.GameObject;
 import com.redartedgames.ball.consts.Consts;
 
 public class BlackScreenAnimation {
+
+	public int comicCounter;
 	int width = 20;
 	public int direction = 0;
-	float speed = 10;
+	float speed = 20;
 	Random rand;
 	ArrayList<Float> rects, speeds;
 	public boolean hasEnded;
@@ -19,6 +21,7 @@ public class BlackScreenAnimation {
 	public Comic comic;
 	
 	public BlackScreenAnimation() {
+		comicCounter = 0;
 		comic = new Comic();
 		rand = new Random();
 		rects = new ArrayList<>();
@@ -39,6 +42,10 @@ public class BlackScreenAnimation {
 	}
 	
 	public void update(float delta) {
+		if (comicCounter <= 0) {
+			hasEnded = true;
+			return;
+		}
 		comic.update(delta);
 		boolean flag = true;
 		float k = 0f;
@@ -56,6 +63,14 @@ public class BlackScreenAnimation {
 
 		}
 		hasEnded = flag;
+//		if (hasEnded) {
+//			comicCounter--;
+//			if (comicCounter > 0) {
+//				comic.loadNext();
+//				animateOn();
+//			}
+//
+//		}
 		//Gdx.app.log("blackScreenAnimation", "flag: " + flag);
 	}
 	

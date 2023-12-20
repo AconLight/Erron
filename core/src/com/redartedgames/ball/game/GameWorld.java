@@ -18,8 +18,11 @@ import com.redartedgames.ball.consts.Consts;
 import com.redartedgames.ball.screen.World;
 import com.redartedgames.ball.sound.SoundHandler;
 
+import static com.redartedgames.ball.LevelLoader.getComicCtr;
+
 public class GameWorld extends World{
 
+	public static Player staticPlayer;
 	public ButtonRect but;
 	public Ball ball, ball1, ball2;
 	public ShiftedRect rect;
@@ -97,23 +100,29 @@ public class GameWorld extends World{
 		reversableObjects = new ArrayList<ReversableObject>();
 		isForward = true;	
 		player = new Player(40, 250, 1f, null, 10);
+		staticPlayer = player;
 		player.setHints(levelId);
 		impsCollection = new ImpsCollection();
 		nextLvlRect.visibility = 1f;
 		blackScreenAnimation.comic.load(levelId);
+
 	}
 
 	public void pause() {
 		isPause = true;
-		gameObjects.add(pause);
+		if (!gameObjects.contains(pause)) {
+			gameObjects.add(pause);
+		}
+		pause.pause();
 	}
 
 	public void unpause() {
 		isPause = false;
-		gameObjects.remove(pause);
+		//gameObjects.remove(pause);
+		pause.unpause();
 	}
 
-	SpriteObject pause;
+	public PauseSprite pause;
 	public Boolean isPause = false;
 	
 	public GameWorld() {
@@ -132,8 +141,8 @@ public class GameWorld extends World{
 
 		blackScreenAnimation = new BlackScreenAnimation();
 		restart(LauncherSettings.startLvl);
-		pause = new SpriteObject(Consts.gameWidth/2, Consts.gameHeight/2, null, 0); pause.addTexture("graphic/pause.png");
-		pause.priority = 2;
+		pause = new PauseSprite();
+		pause.priority = 20;
 	}
 	
 	public void restartLvl() {
@@ -141,10 +150,27 @@ public class GameWorld extends World{
 		// restart(LauncherSettings.startLvl);
 		timeNextLvl = 0;
 		isNextLvl  = true;
+		blackScreenAnimation.comicCounter = getComicCtr(levelId);
 		blackScreenAnimation.comic.load(levelId);
 	}
 
 	float breakTime = 0f;
+
+	public void goNext() {
+		if (LauncherSettings.saveHints) {
+			player.particles.saveAllFrames(levelId);
+		}
+		LauncherSettings.startLvl++;
+		LauncherSettings.maxLevel = Math.max(LauncherSettings.maxLevel, LauncherSettings.startLvl);
+		Preferences prefs = Gdx.app.getPreferences("maxLavel");
+		prefs.putInteger("value", LauncherSettings.maxLevel);
+		prefs.flush();
+		timeNextLvl = 0;
+		isNextLvl  = true;
+		levelId++;
+		blackScreenAnimation.comicCounter = getComicCtr(levelId);
+		SoundHandler.nextLvl();
+	}
 	
 	@Override
 	public void update(float delta) {
@@ -156,18 +182,19 @@ public class GameWorld extends World{
 			
 			timeManagerUpdate(delta);
 			if (player.getPosition().x > Consts.gameWidth) {
-				if (LauncherSettings.saveHints) {
-					player.particles.saveAllFrames(levelId);
-				}
-				LauncherSettings.startLvl++;
-				LauncherSettings.maxLevel = Math.max(LauncherSettings.maxLevel, LauncherSettings.startLvl);
-				Preferences prefs = Gdx.app.getPreferences("maxLavel");
-				prefs.putInteger("value", LauncherSettings.maxLevel);
-				prefs.flush();
-				timeNextLvl = 0;
-				isNextLvl  = true;
-				levelId++;
-				SoundHandler.nextLvl();
+//				if (LauncherSettings.saveHints) {
+//					player.particles.saveAllFrames(levelId);
+//				}
+//				LauncherSettings.startLvl++;
+//				LauncherSettings.maxLevel = Math.max(LauncherSettings.maxLevel, LauncherSettings.startLvl);
+//				Preferences prefs = Gdx.app.getPreferences("maxLavel");
+//				prefs.putInteger("value", LauncherSettings.maxLevel);
+//				prefs.flush();
+//				timeNextLvl = 0;
+//				isNextLvl  = true;
+//				levelId++;
+//				SoundHandler.nextLvl();
+				goNext();
 			}
 			
 			if (!player.isAlive) {
@@ -191,6 +218,9 @@ public class GameWorld extends World{
 				breakTime = 0f;
 				blackScreenAnimation.reset();
 				breakContinue = false;
+				if (blackScreenAnimation.comicCounter <= 0) {
+					breakContinue = true;
+				}
 				breakWindow.storyText.isOn = true;
 
 			}
@@ -199,11 +229,27 @@ public class GameWorld extends World{
 				blackScreenAnimation.update(delta);
 				if (blackScreenAnimation.hasEnded && blackScreenAnimation.direction < 0 && breakContinue) blackScreenAnimation.animateOn();
 				if (blackScreenAnimation.hasEnded && blackScreenAnimation.direction > 0) {
-					blackScreenAnimation.isOn = false;
-					isBreak = false;
-					isNextLvl = false;
-					breakWindow.storyText.isOn = false;
-					load();
+					if (blackScreenAnimation.comicCounter <= 1) {
+						blackScreenAnimation.isOn = false;
+						isBreak = false;
+						isNextLvl = false;
+						breakWindow.storyText.isOn = false;
+						load();
+					} else {
+						blackScreenAnimation.comicCounter--;
+						isBreak = true;
+						breakTime = 0f;
+						blackScreenAnimation.reset();
+						breakContinue = false;
+						breakWindow.storyText.isOn = true;
+						blackScreenAnimation.comic.loadNext();
+//						blackScreenAnimation.isOn = false;
+//						isBreak = false;
+//						isNextLvl = false;
+//						breakWindow.storyText.isOn = false;
+//						load();
+					}
+
 				}
 			}
 		}

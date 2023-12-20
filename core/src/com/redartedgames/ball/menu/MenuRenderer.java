@@ -90,7 +90,7 @@ public class MenuRenderer extends ScreenRenderer{
 
 	float colorFact = 1.1f;
 	public void render() {
-		Gdx.app.log("color", c1.toString());
+		//Gdx.app.log("color", c1.toString());
 		c1 = new Color(((MenuWorld)world).selectedColor);
 		c1 = new Color(c1.r*colorFact, c1.g*colorFact, c1.b*colorFact, c1.a);
 

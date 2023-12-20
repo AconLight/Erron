@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.redartedgames.ball.objects.GameObject;
 
 public class Bush extends GameObject{
-	int thickness = 3;
+	int thickness = 2;
 	float sclV = 0.995f;
 	float playerR = 150;
 	boolean shouldGrow = true;
@@ -20,7 +20,7 @@ public class Bush extends GameObject{
 	Random rand;
 
 	class BushElement {
-		float sizeScl = 1;
+		float sizeScl = 1f;
 		public Vector2 position1, position2, size;
 		
 		ArrayList<BushElement> nexts;

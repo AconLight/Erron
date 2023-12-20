@@ -339,8 +339,12 @@ public class Player extends Ball{
 	}
 	
 	public void setIsJumping(boolean isJumping) {
-		if (!isConversation)
+		if (!isConversation) {
+			if (!isJumping) {
+				fuel = 0;
+			}
 			this.isJumping = isJumping;
+		}
 		else
 			this.isJumping = false;
 	}

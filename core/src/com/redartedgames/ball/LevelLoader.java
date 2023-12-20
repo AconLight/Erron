@@ -3,24 +3,32 @@ package com.redartedgames.ball;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
+import com.redartedgames.ball.consts.PhysicConsts;
 import com.redartedgames.ball.dialog.DialogHero;
 import com.redartedgames.ball.dialog.Hint;
 import com.redartedgames.ball.game.GameWorld;
-import com.redartedgames.ball.myobjects.Ball;
-import com.redartedgames.ball.myobjects.HangingGuy;
-import com.redartedgames.ball.myobjects.ImpsCollection;
-import com.redartedgames.ball.myobjects.LavaRect;
-import com.redartedgames.ball.myobjects.MovingRect;
-import com.redartedgames.ball.myobjects.Player;
-import com.redartedgames.ball.myobjects.Rect;
-import com.redartedgames.ball.myobjects.StaticButton;
-import com.redartedgames.ball.myobjects.TimeBackItem;
+import com.redartedgames.ball.myobjects.*;
 import com.redartedgames.ball.objects.Hitbox.BehaviorMode;
+import com.redartedgames.ball.objects.ReversableMovement;
 import com.redartedgames.ball.objects.ReversableObject;
 import com.redartedgames.ball.consts.Consts;
 
 public class LevelLoader {
 
+	public static int getComicCtr(int levelId) {
+		switch (levelId) {
+			case 0:
+				return 0;
+			case 1:
+				return 3;
+			case 2:
+				return 0;
+			case 3:
+				return 0;
+			default:
+				return 0;
+		}
+	}
 	public static ArrayList<ReversableObject> getLevel(int levelId, Player player, ImpsCollection impsCollection, GameWorld gameWorld) {
 		ArrayList<ReversableObject> objects = new ArrayList<ReversableObject>();		
 		switch (levelId) {
@@ -59,7 +67,7 @@ public class LevelLoader {
 			objects.add(new Rect(1920/2, 100, 1920, 200, BehaviorMode.kinematic, null, 0));
 			HangingGuy h = new HangingGuy(170, 400, 0, null);
 			TimeBackItem e = new TimeBackItem(700, 300, null, 0);
-			e.setItem("graphic/sznur.png", 700, 300, 2);
+			//e.setItem("graphic/sznur.png", 700, 300, 2);
 			player.easterEggs.add(e);
 			objects.add(e);
 //			Gdx.app.log("lvlLoader", "lvl1 load");
@@ -97,6 +105,7 @@ public class LevelLoader {
 			objects.add(new Rect(1920/2, 200, 400, 50, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(1920/4, 150, 100, 50, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(1920-1920/4, 150, 100, 50, BehaviorMode.kinematic, null, 0));
+
 			break;
 		}
 		case 3: { // guziki - wprowadzenie
@@ -137,7 +146,7 @@ public class LevelLoader {
 		}
 
 		// here goes double jump and slide off jump
-		case 5: {
+		case -5: {
 			LavaRect lava = new LavaRect(925, 55, 1630, 120, null, 0);
 			lava.setPlayer(player);
 			objects.add(lava);
@@ -152,7 +161,7 @@ public class LevelLoader {
 
 			break;
 		}
-		case 6: {
+		case -6: {
 
 			LavaRect lava = new LavaRect(925, 25, 1630, 120, null, 0);
 			lava.setPlayer(player);
@@ -167,7 +176,7 @@ public class LevelLoader {
 			break;
 		}
 
-		case 7: {
+		case -7: {
 			
 			LavaRect lava = new LavaRect(925, 55, 1630, 120, null, 0);
 			lava.setPlayer(player);
@@ -195,7 +204,7 @@ public class LevelLoader {
 		
 		// wi�cej platformowych leveli jak w powy�szych
 		
-		case 8: { // statyczny imp - wprowadzenie
+		case 5: { // statyczny imp - wprowadzenie
 			LavaRect lava = new LavaRect(1920/2, 50, 1920, 100, null, 0);
 			lava.setPlayer(player);
 			objects.add(lava);
@@ -211,7 +220,7 @@ public class LevelLoader {
 			objects.add(new StaticButton(1920/4+300 , 250, m1, null, 0));
 			
 			TimeBackItem e = new TimeBackItem(1200, 200, null, 0);
-			e.setItem("graphic/gra.png", 1200, 200, 4);
+			//e.setItem("graphic/gra.png", 1200, 200, 4);
 			player.easterEggs.add(e);
 			objects.add(e);
 			objects.add(new Hint(780, 30, 200, 50, "hold SPACE on the lamp", null, 0));
@@ -226,7 +235,7 @@ public class LevelLoader {
 		
 		//wi�cej leveli ze statycznym impem jak w powy�szym
 		
-		case 9: { //cofanie z platformy
+		case 6: { //cofanie z platformy
 			LavaRect lava = new LavaRect(925, 5, 1390, 120, null, 0);
 			lava.setPlayer(player);
 			objects.add(lava);
@@ -244,7 +253,7 @@ public class LevelLoader {
 			lava.setStaticImps(impsCollection);
 			break;
 		}
-		case 10: { //platforma + cofanie z platformy
+		case 7: { //platforma + cofanie z platformy
 			LavaRect lava = new LavaRect(1022, 30, 1290, 70, null, 0);
 			lava.setPlayer(player);
 			MovingRect m1, m2, m3;
@@ -268,7 +277,7 @@ public class LevelLoader {
 			break;
 		}
 		
-		case 11: { //cofanie z platformy x2
+		case 8: { //cofanie z platformy x2
 			LavaRect lava =new LavaRect(925, 5, 1790, 120, null, 0);
 			lava.setPlayer(player);
 			objects.add(lava);
@@ -293,8 +302,12 @@ public class LevelLoader {
 			objects.add(impsCollection);
 			lava.setStaticImps(impsCollection);
 			break;
-		}		
-		case 12: { //zamra�anie
+		}
+			case 9: { // boss
+				objects.add(new Boss1(Consts.gameWidth*0.8f, 200, null, 0));
+				break;
+			}
+		case 10: { //zamra�anie
 			LavaRect lava;
 			objects.add(lava = new LavaRect(936, 30, 1520, 70, null, 0));
 			lava.setPlayer(player);
@@ -317,7 +330,7 @@ public class LevelLoader {
 			lava.setStaticImps(impsCollection);
 			break;
 		}
-		case 13: { //zamra�anie cd
+		case 11: { //zamra�anie cd
 			
 			MovingRect m1, m2;
 			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0));
@@ -335,7 +348,7 @@ public class LevelLoader {
 			
 			break;
 		}
-		case 14: { //zamra�anie cd 2
+		case 12: { //zamra�anie cd 2
 			
 			MovingRect m1, m2, m3;
 			player.setPosition(new Vector2(10, 550));
@@ -354,7 +367,7 @@ public class LevelLoader {
 			objects.add(new StaticButton(350, 230, m3, null, 0));
 			
 			TimeBackItem e = new TimeBackItem(900, 650, null, 0);
-			e.setItem("graphic/gracz.png", 900, 650, 6);
+			//e.setItem("graphic/gracz.png", 900, 650, 6);
 			player.easterEggs.add(e);
 			objects.add(e);
 			
@@ -364,7 +377,7 @@ public class LevelLoader {
 			
 			break;
 		}
-		case 15: {
+		case 13: {
 			player.setPosition(new Vector2(10, 550));
 			LavaRect lava;
 			objects.add(lava = new LavaRect(950, 55, 1720, 150, null, 0));
@@ -387,18 +400,29 @@ public class LevelLoader {
 			lava.setStaticImps(impsCollection);
 			break;
 		}
-		case 16: {
+		case 14: {
 			player.setPosition(new Vector2(10, 250));
 			objects.add(new Rect(950, 55, 1960, 150, BehaviorMode.kinematic, null, 0));
-			objects.add(new Ball(775, 180, 50, 50, BehaviorMode.dynamic, null, 0));
-			objects.add(new Ball(863, 855, 50, 50, BehaviorMode.dynamic, null, 0));
-			objects.add(new Rect(616, 255, 277, 50, BehaviorMode.kinematic, null, 0));
+
+			Ball ball1 = new Ball(1175, 280, 50, 50, BehaviorMode.dynamic, null, 0);
+			((ReversableMovement) ball1.getMovement()).setDrag(PhysicConsts.DRAG_X*0.3f, PhysicConsts.DRAG_Y*1f);
+			objects.add(ball1);
+			Ball ball2 = new Ball(1263-10, 555, 50, 50, BehaviorMode.dynamic, null, 0);
+			((ReversableMovement) ball2.getMovement()).setDrag(PhysicConsts.DRAG_X*0.3f, PhysicConsts.DRAG_Y*1f);
+			objects.add(ball2);
+
+			objects.add(new Rect(816, 255, 277, 50, BehaviorMode.kinematic, null, 0));
+
+			objects.add(new Rect(1175, 200, 15, 50, BehaviorMode.kinematic, null, 0));
+			objects.add(new Rect(1148, 170, 75, 50, BehaviorMode.kinematic, null, 0));
+			objects.add(new Rect(1130, 140, 140, 50, BehaviorMode.kinematic, null, 0));
+
 			MovingRect m1;
-			objects.add(m1 = new MovingRect(422, 305, 422, 205, 110, 151, BehaviorMode.kinematic, null, 0));
-			objects.add(new StaticButton(780, 265, m1, null, 0, true));
+			objects.add(m1 = new MovingRect(622, 305, 622, 205, 110, 151, BehaviorMode.kinematic, null, 0));
+			objects.add(new StaticButton(816, 365, m1, null, 0, true));
 			
 			TimeBackItem e = new TimeBackItem(800, 400, null, 0);
-			e.setItem("graphic/czas.png", 800, 400, 5);
+			//e.setItem("graphic/czas.png", 800, 400, 5);
 			player.easterEggs.add(e);
 			objects.add(e);
 			
@@ -437,7 +461,7 @@ public class LevelLoader {
 //			
 //			break;
 //		}
-		case 17: {
+		case 15: {
 			objects.add(new Rect(-120, 540, 200, 1080, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(975, 55, 1980, 150, BehaviorMode.kinematic, null, 0));
 			objects.add(new Rect(1525, 330, 820, 100, BehaviorMode.kinematic, null, 0));
@@ -459,7 +483,7 @@ public class LevelLoader {
 			objects.add(dh);
 			break;
 		}
-		case 18: {
+		case 16: {
 			MovingRect m1, m2, m3, m4;
 			objects.add(m1 = new MovingRect(825, -35, 825, 115, 390, 120, BehaviorMode.kinematic, null, 0));
 			objects.add(m2 = new MovingRect(1350, -35, 1350, 215, 190, 230, BehaviorMode.kinematic, null, 0));
@@ -489,7 +513,7 @@ public class LevelLoader {
 			break;
 		}
 		
-		case 19: {
+		case 17: {
 			MovingRect m1, m2, m3;
 			objects.add(m1 = new MovingRect(825, 115, 825, 400, 160, 160, BehaviorMode.kinematic, null, 0));
 			objects.add(m2 = new MovingRect(200, 715, -100, 715, 160, 50, BehaviorMode.kinematic, null, 0));
@@ -517,7 +541,7 @@ public class LevelLoader {
 			break;
 		}
 		
-		case 20: {
+		case 18: {
 			MovingRect m1, m2, m3, m4, m5;
 			objects.add(m1 = new MovingRect(825, 115, 810, 400, 160, 160, BehaviorMode.kinematic, null, 0));
 			objects.add(m5 = new MovingRect(825, 115-285, 810, 115, 160, 160, BehaviorMode.kinematic, null, 0));
@@ -554,7 +578,7 @@ public class LevelLoader {
 			break;
 		}
 		
-		case 21: {
+		case 19: {
 			
 			MovingRect m1, m2, m3, m4, m5, m6;
 			
@@ -592,7 +616,7 @@ public class LevelLoader {
 			break;
 		}
 		
-		case 22: {
+		case 20: {
 			LavaRect lava;
 			MovingRect m1, m2;
 			objects.add(m1 = new MovingRect(892, 390, 692, 390, 331, 80, BehaviorMode.kinematic, null, 0));
@@ -670,9 +694,11 @@ public class LevelLoader {
 				((Rect)obj).bush.setPlayer(player);
 			}
 		}
-		
-		
-		
+
+		if (gameWorld != null) {
+			gameWorld.blackScreenAnimation.comicCounter = getComicCtr(levelId);
+		}
+
 		return objects;
 	}
 }

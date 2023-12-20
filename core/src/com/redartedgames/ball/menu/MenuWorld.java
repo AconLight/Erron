@@ -99,7 +99,7 @@ public class MenuWorld extends World{
 	public void update(float delta) {
 		colTime += delta;
 		Vector3 newselcol = ColorGenerator.hsvToRgb((180+colTime)%360, 0.5f, 0.5f);
-		Gdx.app.log("siema", newselcol.x + "");
+		//Gdx.app.log("siema", newselcol.x + "");
 		selectedColor = new Color(newselcol.x, newselcol.y, newselcol.z, 1);
 		myTime += 0.3f;
 		float menu_dx = -200/(10+myTime*myTime)*0.9f;

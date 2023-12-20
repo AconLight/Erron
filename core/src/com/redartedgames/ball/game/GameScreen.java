@@ -35,6 +35,10 @@ public class GameScreen extends MyScreen{
 	public void update(float delta) {
 		if(!((GameWorld) world).isPause) {
 			super.update(delta);
+		} else {
+			if (((GameWorld) world).pause != null) {
+				((GameWorld) world).pause.myUpdate(delta);
+			}
 		}
 	}
 

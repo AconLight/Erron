@@ -13,9 +13,11 @@ public class Comic {
 	public Comic() {
 	}
 
-	int[] sizes = {14, 50, 2};
+	public int myLvl;
+
+	int[] sizes = {14, 50, 16};
 	float[] scales = {1.8f, 1.2f, 5f};
-	boolean[] isOvers = {true, true, false};
+	boolean[] isOvers = {true, true, true};
 	boolean isOver = false;
 	Letters[][] texts = {
 			{new Letters(400, 900, "somewhere in the abyss of darkness..."), new Letters(350, 100, "...an entity was awaiting for its rebirth")},
@@ -23,9 +25,15 @@ public class Comic {
 			{new Letters(350, 900, "the entity crawled tirelessly to the surface"), new Letters(400, 100, "looking forward to seeing the sky")}
 	};
 
+	public void loadNext() {
+		load(myLvl+1);
+	}
+
 	public void load(int lvl) {
+		myLvl = lvl;
 		if (lvl > 3) {
-			return;
+			//return;
+			lvl = 1;
 		}
 		letters = texts[lvl-1];
 		isOver = isOvers[lvl-1];

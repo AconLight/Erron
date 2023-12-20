@@ -2,8 +2,10 @@ package com.redartedgames.ball.game;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.redartedgames.ball.LevelLoader;
 import com.redartedgames.ball.consts.LauncherSettings;
 import com.redartedgames.ball.consts.PlayerConsts;
+import com.redartedgames.ball.utils.LvlPrinter;
 
 public class InputHandler implements InputProcessor{
 
@@ -79,6 +81,13 @@ public class InputHandler implements InputProcessor{
 			world.restart(world.levelId+1);
 			break;
 		}
+		case Keys.I: {
+			LvlPrinter.print(world.levelId);
+			world.goNext();
+			//world.getGameObjects().clear();
+			//world.getGameObjects().addAll(LevelLoader.getLevel(++world.levelId, world.player, world.impsCollection, world));
+			break;
+		}
 		case Keys.K: {
 			LauncherSettings.MakeGIF = !LauncherSettings.MakeGIF;
 			break;
@@ -102,6 +111,13 @@ public class InputHandler implements InputProcessor{
 			world.restartLvl();
 			break;
 		}
+		case Keys.Q: {
+			if (world.isPause) {
+				world.unpause();
+				world.state.setMenu();
+			}
+			break;
+		}
 		case Keys.ENTER: {
 			if (world.isPause) {
 				world.unpause();
@@ -113,7 +129,7 @@ public class InputHandler implements InputProcessor{
 		case Keys.ESCAPE: {
 			if (world.isPause) {
 				world.unpause();
-				world.state.setMenu();
+				//world.state.setMenu();
 			} else {
 				world.pause();
 			}
